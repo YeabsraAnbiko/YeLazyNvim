@@ -1,0 +1,61 @@
+# === Neovim ===
+# Ignore Neovim swap files
+*.swp
+*.swo
+*.swap
+
+# Ignore backup files
+*.bak
+*.tmp
+
+# Ignore write-ahead log files (WAL)
+*.swo
+*.swp
+
+# === lazy-lock.json ===
+lazy-lock.json
+
+# === Logs ===
+*.log
+logs/
+
+# === macOS ===
+.DS_Store
+
+# === Linux ===
+*~
+
+# === Windows ===
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# === Node.js (if using node for build tools) ===
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# === Python (if you use Python for scripts or tests) ===
+__pycache__/
+*.py[cod]
+*.egg
+*.egg-info/
+dist/
+build/
+
+# === Editor folders ===
+.vscode/
+.idea/
+
+# === Environment files ===
+.env
+.env.*
+
+# === Compiled binaries ===
+*.out
+*.o
+*.so
+*.class
+*.exe
+
