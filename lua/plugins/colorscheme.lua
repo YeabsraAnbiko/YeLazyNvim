@@ -67,11 +67,6 @@ return {
 	    -- Set colorscheme after options
 	    vim.cmd [[
 	    colorscheme rose-pine
-	    highlight SignColumn guibg=NONE
-	    highlight Normal guibg=NONE ctermbg=NONE
-	    highlight NormalNC guibg=NONE ctermbg=NONE
-	    highlight EndOfBuffer guibg=NONE ctermbg=NONE
-	    highlight LineNr guibg=NONE
 	    ]]
 
     end

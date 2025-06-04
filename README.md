@@ -1,4 +1,4 @@
-# YeNvim
+# YeLazyNvim
 
 This is my custom Neovim configuration powered by `lazy.nvim`. The setup includes various plugins and settings that enhance productivity and development experience in Neovim.
 

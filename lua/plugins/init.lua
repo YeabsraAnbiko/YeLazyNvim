@@ -5,6 +5,9 @@ local plugin_files = {
     "git_and_undo",
     "lsp-cmp-mason",
     "telescope",
+    "dap",
+    "tmux",
+    "neo-tree",
 }
 
 local plugins = {}

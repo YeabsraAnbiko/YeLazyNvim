@@ -1,8 +1,6 @@
 return {
-
-  -- Mason: LSP installer
   {
-    "williamboman/mason.nvim",
+      "mason-org/mason.nvim",
     cmd = "Mason",
     opts = {
       ui = {
@@ -16,11 +14,15 @@ return {
     },
   },
 
-  -- Mason-LSPConfig: Bridge between Mason & LSPConfig
+  -- mason-lspconfig: bridge between mason & lspconfig
   {
-    "williamboman/mason-lspconfig.nvim",
+    "mason-org/mason-lspconfig.nvim",
     lazy = false,
-    dependencies = { "williamboman/mason.nvim" },
+    dependencies = {
+        { "mason-org/mason.nvim", opts = {} },
+        "neovim/nvim-lspconfig",
+    },
+
     opts = function()
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
@@ -33,8 +35,8 @@ return {
         map("n", "gr", vim.lsp.buf.references, opts)
         map("n", "<leader>rn", vim.lsp.buf.rename, opts)
         map("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-        map("n", "<C-k>", vim.lsp.buf.signature_help, opts)
-        map("n", "K", vim.lsp.buf.hover, opts)
+        map("n", "<c-k>", vim.lsp.buf.signature_help, opts)
+        map("n", "k", vim.lsp.buf.hover, opts)
         map("n", "[d", vim.diagnostic.goto_prev, opts)
         map("n", "]d", vim.diagnostic.goto_next, opts)
         map("n", "<leader>d", vim.diagnostic.open_float, opts)
@@ -44,26 +46,40 @@ return {
         ensure_installed = {
           "lua_ls", "emmet_language_server", "clangd", "bashls", "cssls",
           "html", "vtsls", "jsonls", "marksman", "pyright", "pylsp",
-          "sqlls", "lemminx", "vimls", "grammarly",
+          "sqlls", "vimls", "grammarly",
         },
+
         handlers = {
-          function(server_name)
-            require("lspconfig")[server_name].setup({
-              capabilities = capabilities,
-              on_attach = on_attach,
-            })
-          end,
+  function(server_name)
+    require("lspconfig")[server_name].setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+    })
+  end,
+  lua_ls = function()
+    require("lspconfig").lua_ls.setup({
+      settings = {
+        Lua = {
+          diagnostics = {
+            globals = { "vim" },
+          },
         },
+      },
+      capabilities = capabilities,
+      on_attach = on_attach,
+    })
+  end
+},
       }
     end,
   },
 
-  -- LSPConfig: just for global diagnostic settings
+  -- -- lspconfig: just for global diagnostic settings
   {
     "neovim/nvim-lspconfig",
     lazy = false,
     dependencies = {
-      "williamboman/mason-lspconfig.nvim",
+      "mason-org/mason-lspconfig.nvim",
       "hrsh7th/cmp-nvim-lsp",
     },
     config = function()
@@ -83,21 +99,33 @@ return {
     end,
   },
 
-  -- nvim-cmp (autocomplete)
+  -- -- nvim-cmp (autocomplete)
   {
     "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
-    dependencies = { "hrsh7th/cmp-nvim-lsp" },
+    event = "insertenter",
+    dependencies = {
+        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-path",
+        "hrsh7th/cmp-buffer",
+        "L3MON4D3/LuaSnip",
+        "saadparwaiz1/cmp_luasnip",
+    },
     config = function()
       local cmp = require("cmp")
       cmp.setup({
-        sources = { { name = "nvim_lsp" } },
-        mapping = cmp.mapping.preset.insert({
-          ["<C-Space>"] = cmp.mapping.complete(),
-          ["<CR>"] = cmp.mapping.confirm({ select = true }),
-          ["<Tab>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-          ["<S-Tab>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-        }),
+        sources = {
+  { name = "nvim_lsp" },
+  { name = "path" },
+  { name = "buffer" },
+  { name = "luasnip" },
+},
+
+mapping = cmp.mapping.preset.insert({
+  ["<c-space>"] = cmp.mapping.complete(),
+  ["<cr>"] = cmp.mapping.confirm({ select = true }),
+  ["<tab>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+  ["<s-tab>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+}),
         completion = {
           completeopt = "menu,menuone,noselect",
         },

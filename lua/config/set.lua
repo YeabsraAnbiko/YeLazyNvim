@@ -27,7 +27,7 @@ vim.opt.wrap = false         -- Disable line wrapping
 -- File management settings
 vim.opt.backup = false
 vim.opt.swapfile = false
-vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"  -- Set the undo directory
+vim.opt.undodir = os.getenv("HOME") .. "/.nvim/undodir"  -- Set the undo directory
 vim.opt.undofile = true      -- Enable persistent undo files
 
 -- Search settings
@@ -38,6 +38,7 @@ vim.opt.smartcase = true     -- Override ignorecase if uppercase letters are use
 
 -- Visual enhancements
 vim.opt.termguicolors = true -- Enable 24-bit RGB colors
+vim.opt.updatetime = 100
 vim.opt.scrolloff = 8        -- Keep 8 lines visible above/below the cursor
 vim.opt.sidescrolloff = 8    -- Keep 8 columns visible left/right
 vim.opt.signcolumn = "yes"   -- Always show the sign column
