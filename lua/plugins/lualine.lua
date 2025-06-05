@@ -1,20 +1,14 @@
 return {
     {
-        "nvim-tree/nvim-web-devicons",
-        config = function()
-            require("nvim-web-devicons").setup()
-        end
-    },
-    { 
         'nvim-lualine/lualine.nvim',
-        dependencies = { 
+        dependencies = {
             'nvim-tree/nvim-web-devicons', opt = true,
         },
         config = function()
             require('lualine').setup {
                 options = {
                     icons_enabled = true,
-                    theme = 'powerline_dark',
+                    theme = 'auto', -- powerline_dark , horizon, 'rose-pine' and etc
                     component_separators = { left = '', right = ''},
                     section_separators = { left = '', right = ''},
                     always_divide_middle = true,

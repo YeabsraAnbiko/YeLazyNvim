@@ -8,6 +8,7 @@ local plugin_files = {
     "dap",
     "tmux",
     "neo-tree",
+    "indent-blinkline",
 }
 
 local plugins = {}
