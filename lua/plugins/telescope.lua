@@ -1,94 +1,92 @@
 return {
-    {
-        'nvim-telescope/telescope.nvim',
-        config = function()
-            local actions = require('telescope.actions')
+  {
+    'nvim-telescope/telescope.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope-fzf-native.nvim',
+      'nvim-telescope/telescope-ui-select.nvim',
+    },
+    config = function()
+      local actions = require('telescope.actions')
 
-            require('telescope').setup({
-                defaults = {
-                    mappings = {
-                        i = {  -- Insert mode
-                            ["<C-j>"] = actions.move_selection_next,
-                            ["<C-k>"] = actions.move_selection_previous,
-                        }
-                    },
-                },
-            })
+      require('telescope').setup({
+        defaults = {
+          prompt_prefix = "🔍 ",
+          selection_caret = " ",
+          layout_strategy = "horizontal",
+          layout_config = {
+            horizontal = {
+              preview_width = 0.6,
+            },
+            vertical = {
+              preview_height = 0.6,
+            },
+          },
+          file_ignore_patterns = { "node_modules", ".git/", "dist", "target", "%.lock" },
+          mappings = {
+            i = {
+              ["<C-j>"] = actions.move_selection_next,
+              ["<C-k>"] = actions.move_selection_previous,
+              ["<esc>"] = actions.close,
+            },
+            n = {
+              ["q"] = actions.close,
+            }
+          },
+        },
+        pickers = {},
+        extensions = {
+          ["ui-select"] = {
+            require("telescope.themes").get_dropdown({})
+          },
+        },
+      })
 
-            local builtin = require('telescope.builtin')
+      require('telescope').load_extension('fzf')
+      require('telescope').load_extension('ui-select')
 
-            -- File Search
+      local builtin = require('telescope.builtin')
 
-            vim.keymap.set('n', '<leader>ff', function()
-                builtin.find_files({hidden=true})
-            end)
+      -- File Search
+      vim.keymap.set('n', '<leader>ff', function() builtin.find_files({hidden=true}) end, { desc = 'Find Files' })
+      vim.keymap.set('n', '<leader>fh', builtin.oldfiles, { desc = 'Recent Files' })
+      vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Buffers' })
+      vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Live Grep' })
+      vim.keymap.set('n', '<leader>ll', builtin.current_buffer_fuzzy_find, { desc = 'Fuzzy Current Buffer' })
+      vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = 'Resume Last Search' })
 
-            vim.keymap.set('n', '<leader>fh', function ()
-                builtin.oldfiles()
-            end)
+      -- Git
+      vim.keymap.set('n', '<leader>Gf', builtin.git_files, { desc = 'Git Files' })
+      vim.keymap.set('n', '<leader>Gl', builtin.git_commits, { desc = 'Git Commits' })
+      vim.keymap.set('n', '<leader>Gd', builtin.git_bcommits, { desc = 'Git Buffer Commits' })
+      vim.keymap.set('n', '<leader>Gs', builtin.git_status, { desc = 'Git Status' })
+      vim.keymap.set('n', '<leader>Gb', builtin.git_branches, { desc = 'Git Branches' })
 
-            vim.keymap.set('n', '<leader>fb', function ()
-                builtin.buffers()
-            end)
+      -- LSP (if available)
+      vim.keymap.set('n', '<leader>sd', builtin.lsp_definitions, { desc = 'LSP Definitions' })
+      vim.keymap.set('n', '<leader>sr', builtin.lsp_references, { desc = 'LSP References' })
+      vim.keymap.set('n', '<leader>si', builtin.lsp_implementations, { desc = 'LSP Implementations' })
+      vim.keymap.set('n', '<leader>ss', builtin.lsp_document_symbols, { desc = 'Document Symbols' })
 
-            vim.keymap.set('n', '<leader>fg', function()
-                builtin.live_grep()
-            end)
-
-            vim.keymap.set('n', '<leader>ll', function()
-                builtin.current_buffer_fuzzy_find()
-            end)
-
-            -- Telescope Git commands
-
-            vim.keymap.set('n', '<leader>Gf', function()
-                builtin.git_files()
-            end)
-
-            vim.keymap.set('n', '<leader>Gl', function ()
-                builtin.git_commits()
-            end)
-
-            vim.keymap.set('n', '<leader>Gd', function ()
-                builtin.git_bcommits()
-            end)
-
-            vim.keymap.set('n', '<leader>Gs', function ()
-                builtin.git_status()
-            end)
-
-            vim.keymap.set('n', '<leader>Gb', function ()
-                builtin.git_branches()
-            end)
-
-            -- Others
-
-            vim.keymap.set('n', '<leader>cs', function()
-                builtin.colorscheme()
-            end)
-
-            vim.keymap.set('n', '<leader>rg', function ()
-                builtin.registers()
-            end)
-
-            vim.keymap.set('n', '<leader>tr', function()
-                builtin.treesitter()
-            end)
-
-            vim.keymap.set('n', '<leader>sp', function ()
-                builtin.spell_suggest()
-            end)
-
-            vim.keymap.set('n', '<leader>vo', function ()
-                builtin.vim_options()
-            end)
-
-            vim.keymap.set('n', '<leader>cm', function ()
-                builtin.commands()
-            end)
-
-
-        end
-    }
+      -- Others
+      vim.keymap.set('n', '<leader>cs', builtin.colorscheme, { desc = 'Colorscheme' })
+      vim.keymap.set('n', '<leader>rg', builtin.registers, { desc = 'Registers' })
+      vim.keymap.set('n', '<leader>tr', builtin.treesitter, { desc = 'Treesitter' })
+      vim.keymap.set('n', '<leader>sp', builtin.spell_suggest, { desc = 'Spell Suggest' })
+      vim.keymap.set('n', '<leader>vo', builtin.vim_options, { desc = 'Vim Options' })
+      vim.keymap.set('n', '<leader>cm', builtin.commands, { desc = 'Commands' })
+      vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = 'Help Tags' })
+      vim.keymap.set('n', '<leader>sm', builtin.man_pages, { desc = 'Man Pages' })
+      vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = 'Search Keymaps' })
+    end
+  },
+  {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    build = 'make',
+    cond = vim.fn.executable("make") == 1,
+  },
+  {
+    'nvim-telescope/telescope-ui-select.nvim'
+  }
 }
 

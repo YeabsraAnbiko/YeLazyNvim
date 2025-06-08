@@ -1,106 +1,63 @@
+-- lua/plugins/colorscheme.lua
 return {
+  -- Tokyonight (Default Theme)
   {
-    "rose-pine/neovim",
-    name = "rose-pine",
-    priority = 1000,
+    "folke/tokyonight.nvim",
+    priority = 1000, -- Load first
     config = function()
-	    require('rose-pine').setup({
-		    --- @usage 'auto'|'main'|'moon'|'dawn'
-		    variant = 'auto',
-		    --- @usage 'main'|'moon'|'dawn'
-		    dark_variant = 'moon',
-		    bold_vert_split = false,
-		    dim_nc_background = false,
-		    disable_background = false,
-		    disable_float_background = true,
-		    disable_italics = false,
+      require("tokyonight").setup({
+        style = "moon", -- "storm", "moon", "night", or "day"
+        transparent = false,
+        terminal_colors = true,
+        styles = {
+          comments = { italic = true },
+          keywords = { italic = true },
+          functions = {},
+          variables = {},
+          sidebars = "dark",
+          floats = "dark",
+        },
+        sidebars = { "qf", "help", "neo-tree", "terminal", "spectre_panel" },
+        dim_inactive = false,
+        lualine_bold = true,
+      })
 
-		    --- @usage string hex value or named color from rosepinetheme.com/palette
-		    groups = {
-			    background = 'base',
-			    background_nc = '_experimental_nc',
-			    panel = 'surface',
-			    panel_nc = 'base',
-			    border = 'highlight_med',
-			    comment = 'muted',
-			    link = 'iris',
-			    punctuation = 'subtle',
+      -- Set as default theme
+      vim.cmd.colorscheme("tokyonight")
 
-			    error = 'love',
-			    hint = 'iris',
-			    info = 'foam',
-			    warn = 'gold',
 
-			    headings = {
-				    h1 = 'iris',
-				    h2 = 'foam',
-				    h3 = 'rose',
-				    h4 = 'gold',
-				    h5 = 'pine',
-				    h6 = 'foam',
-			    }
-			    -- or set all headings at once
-			    -- headings = 'subtle'
-		    },
-
-		    -- Change specific vim highlight groups
-		    -- https://github.com/rose-pine/neovim/wiki/Recipes
-		    highlight_groups = {
-			    ColorColumn = { bg = 'highlight_med' },
-			    StatusLine = { fg = 'love', bg = 'love', blend = 10 },
-			    StatusLineNC = { fg = "subtle", bg = "surface" },
-			    -- Blend colours against the "base" background
-			    CursorLine = { bg = 'foam', blend = 10 },
-			    TelescopeBorder = { fg = "foam", bg = "none" },
-			    TelescopeNormal = { bg = "none" },
-			    TelescopePromptNormal = { bg = "base" },
-			    TelescopeResultsNormal = { fg = "subtle", bg = "none" },
-			    TelescopeSelection = { fg = "text", bg = "base" },
-			    TelescopeSelectionCaret = { fg = "rose", bg = "rose" },
-
-			    CurSearch = { fg = "base", bg = "leaf", inherit = false },
-			    Search = { fg = "text", bg = "leaf", blend = 20, inherit = false },
-
-		    }
-	    })
-
-	    -- Set colorscheme after options
-	    vim.cmd [[
-	    colorscheme rose-pine
-	    ]]
-
-    end
+    end,
   },
+
+  -- Catppuccin
   {
-    "ellisonleao/gruvbox.nvim",
-    name = "gruvbox",
-    priority = 1000,
-    config = function()
--- Default options:
-require("gruvbox").setup({
-  terminal_colors = true, -- add neovim terminal colors
-  undercurl = true,
-  underline = true,
-  bold = true,
-  italic = {
-    strings = true,
-    emphasis = true,
-    comments = true,
-    operators = false,
-    folds = true,
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 999,
+    opts = {
+      flavour = "mocha", -- options: latte, frappe, macchiato, mocha
+      transparent_background = false,
+      term_colors = true,
+      integrations = {
+        cmp = true,
+        gitsigns = true,
+        nvimtree = true,
+        telescope = true,
+        notify = true,
+        mini = true,
+        which_key = true,
+        treesitter = true,
+        native_lsp = {
+          enabled = true,
+          underlines = {
+            errors = { "undercurl" },
+            hints = { "undercurl" },
+            warnings = { "undercurl" },
+            information = { "undercurl" },
+          },
+        },
+      },
+    },
   },
-  strikethrough = true,
-  invert_selection = false,
-  invert_signs = false,
-  invert_tabline = false,
-  inverse = true, -- invert background for search, diffs, statuslines and errors
-  contrast = "", -- can be "hard", "soft" or empty string
-  palette_overrides = {},
-  overrides = {},
-  dim_inactive = false,
-  transparent_mode = true,
-})
-    end
-  }
 }
 

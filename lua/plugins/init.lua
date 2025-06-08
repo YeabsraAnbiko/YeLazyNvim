@@ -10,6 +10,9 @@ local plugin_files = {
     "neo-tree",
     "indent-blinkline",
     "colorizer",
+    "bufferline",
+    "noice",
+
 }
 
 local plugins = {}

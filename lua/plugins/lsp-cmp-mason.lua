@@ -1,6 +1,51 @@
 return {
+    -- THEMES
     {
-        "mason-org/mason.nvim",
+        "folke/tokyonight.nvim",
+        lazy = false,
+        priority = 1000,
+        config = function()
+            require("tokyonight").setup({
+                style = "storm", -- options: "storm", "night", "moon", "day"
+                transparent = false,
+                terminal_colors = true,
+                styles = {
+                    comments = { italic = true },
+                    keywords = { italic = true },
+                    functions = {},
+                    variables = {},
+                    sidebars = "dark",
+                    floats = "dark",
+                },
+                sidebars = { "qf", "help" },
+                float_background = "dark",
+                lualine_bold = true,
+            })
+            vim.cmd.colorscheme("tokyonight")
+        end,
+    },
+    {
+        "catppuccin/nvim",
+        name = "catppuccin",
+        priority = 1000,
+        config = function()
+            require("catppuccin").setup({
+                flavour = "mocha",
+                integrations = {
+                    cmp = true,
+                    gitsigns = true,
+                    nvimtree = true,
+                    treesitter = true,
+                    telescope = true,
+                    mason = true,
+                },
+            })
+        end,
+    },
+
+    -- MASON
+    {
+        "williamboman/mason.nvim",
         cmd = "Mason",
         opts = {
             ui = {
@@ -14,27 +59,27 @@ return {
         },
     },
 
+    -- MASON LSPCONFIG
     {
-        "mason-org/mason-lspconfig.nvim",
+        "williamboman/mason-lspconfig.nvim",
         lazy = false,
         dependencies = {
-            { "mason-org/mason.nvim", opts = {} },
+            { "williamboman/mason.nvim" },
             "neovim/nvim-lspconfig",
         },
-
         opts = function()
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
             local lspconfig = require("lspconfig")
 
-                vim.keymap.set("n", "gd",vim.lsp.buf.definition, { desc = "Jump to definition" })
-                vim.keymap.set("n", "gd",vim.lsp.buf.declaration, { desc = "Jump to declaration" })
-                vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, {desc = "Rename"})
-                vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {desc = "Code action"})
-                vim.keymap.set("n", "<c-k>", vim.lsp.buf.signature_help, {desc = "Show signature help"})
-                vim.keymap.set("n", "K", vim.lsp.buf.hover, {desc = "Show hover info"})
-                vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, {desc = "Go to next diagnostics"})
-                vim.keymap.set("n", "]d", vim.diagnostic.goto_next, {desc = "Go to previous diagnostics"})
-                vim.keymap.set("n", "<leader>di", vim.diagnostic.open_float, {desc = "Show diagnostic info"})
+            vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition" })
+            vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to Declaration" })
+            vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename" })
+            vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
+            vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature Help" })
+            vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover Info" })
+            vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Prev Diagnostic" })
+            vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next Diagnostic" })
+            vim.keymap.set("n", "<leader>di", vim.diagnostic.open_float, { desc = "Diagnostic Info" })
 
             return {
                 ensure_installed = {
@@ -42,15 +87,12 @@ return {
                     "html", "vtsls", "jsonls", "marksman", "pyright", "pylsp",
                     "sqlls", "vimls", "grammarly",
                 },
-
                 handlers = {
                     function(server_name)
-                        require("lspconfig")[server_name].setup({
-                            capabilities = capabilities,
-                        })
+                        lspconfig[server_name].setup({ capabilities = capabilities })
                     end,
                     ["tailwindcss"] = function()
-                        lspconfig.tailwindcss.setup {
+                        lspconfig.tailwindcss.setup({
                             capabilities = capabilities,
                             settings = {
                                 tailwindCSS = {
@@ -58,8 +100,8 @@ return {
                                         classRegex = {
                                             { "class\\s*=\\s*\"([^\"]*)\"", 1 },
                                             { "className\\s*=\\s*\"([^\"]*)\"", 1 },
-                                            { "tw\\`([^`]*)\\`", 1 },  -- Tailwind macro
-                                            { "cn\\(([^)]*)\\)", 1 }, -- clsx/cn function
+                                            { "tw\\`([^`]*)\\`", 1 },
+                                            { "cn\\(([^)]*)\\)", 1 },
                                         },
                                     },
                                 },
@@ -68,11 +110,15 @@ return {
                                 "html", "javascript", "typescript", "javascriptreact",
                                 "typescriptreact", "svelte", "vue", "php", "blade"
                             },
-                            root_dir = lspconfig.util.root_pattern("tailwind.config.js", "tailwind.config.ts", "postcss.config.js", "package.json", ".git"),
-                        }
+                            root_dir = lspconfig.util.root_pattern(
+                                "tailwind.config.js", "tailwind.config.ts", "postcss.config.js",
+                                "package.json", ".git"
+                            ),
+                        })
                     end,
-                    lua_ls = function()
-                        require("lspconfig").lua_ls.setup({
+                    ["lua_ls"] = function()
+                        lspconfig.lua_ls.setup({
+                            capabilities = capabilities,
                             settings = {
                                 Lua = {
                                     diagnostics = {
@@ -80,25 +126,23 @@ return {
                                     },
                                 },
                             },
-                            capabilities = capabilities,
                         })
-                    end
+                    end,
                 },
             }
         end,
     },
 
-    -- -- lspconfig: just for global diagnostic settings
+    -- GLOBAL LSP DIAGNOSTICS SETUP
     {
         "neovim/nvim-lspconfig",
         lazy = false,
         dependencies = {
-            "mason-org/mason-lspconfig.nvim",
+            "williamboman/mason-lspconfig.nvim",
             "hrsh7th/cmp-nvim-lsp",
         },
         config = function()
             vim.opt.signcolumn = "yes"
-
             vim.diagnostic.config({
                 virtual_text = true,
                 signs = true,
@@ -113,10 +157,10 @@ return {
         end,
     },
 
-    -- -- nvim-cmp (autocomplete)
+    -- AUTOCOMPLETE (nvim-cmp)
     {
         "hrsh7th/nvim-cmp",
-        event = "insertenter",
+        event = "InsertEnter",
         dependencies = {
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-path",
@@ -127,22 +171,21 @@ return {
         config = function()
             local cmp = require("cmp")
             cmp.setup({
-                sources = {
-                    { name = "nvim_lsp" },
-                    { name = "path" },
-                    { name = "buffer" },
-                    { name = "luasnip" },
-                },
-
-                mapping = cmp.mapping.preset.insert({
-                    ["<c-space>"] = cmp.mapping.complete(),
-                    ["<cr>"] = cmp.mapping.confirm({ select = true }),
-                    ["<tab>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-                    ["<s-tab>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-                }),
                 completion = {
                     completeopt = "menu,menuone,noselect",
                 },
+                mapping = cmp.mapping.preset.insert({
+                    ["<C-Space>"] = cmp.mapping.complete(),
+                    ["<CR>"] = cmp.mapping.confirm({ select = true }),
+                    ["<Tab>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+                    ["<S-Tab>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+                }),
+                sources = cmp.config.sources({
+                    { name = "nvim_lsp" },
+                    { name = "luasnip" },
+                    { name = "path" },
+                    { name = "buffer" },
+                }),
             })
         end,
     },

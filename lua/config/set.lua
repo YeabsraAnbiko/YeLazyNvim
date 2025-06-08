@@ -10,8 +10,8 @@ vim.opt.smartindent = true   -- Enable smart indentation for better formatting
 
 vim.opt.shortmess:append("I")
 vim.opt.laststatus=3
-vim.o.winbar="%=%m 📁%f"
-vim.opt.statusline = " %f %m %= %l:%c ♥ "
+-- vim.o.winbar="%=%m 📁%f"
+-- vim.opt.statusline = " %f %m %= %l:%c ♥ "
 -- Cursor appearance
 --vim.opt.guicursor = ""       -- Reset cursor appearance
 
