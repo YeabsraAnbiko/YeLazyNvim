@@ -9,6 +9,7 @@ local plugin_files = {
     "tmux",
     "neo-tree",
     "indent-blinkline",
+    "colorizer",
 }
 
 local plugins = {}
