@@ -28,6 +28,7 @@ return {
               ["<C-j>"] = actions.move_selection_next,
               ["<C-k>"] = actions.move_selection_previous,
               ["<esc>"] = actions.close,
+              ["<c-c>"] = actions.close,
             },
             n = {
               ["q"] = actions.close,
@@ -62,10 +63,10 @@ return {
       vim.keymap.set('n', '<leader>Gs', builtin.git_status, { desc = 'Git Status' })
       vim.keymap.set('n', '<leader>Gb', builtin.git_branches, { desc = 'Git Branches' })
 
-      -- LSP (if available)
+      -- LSP 
       vim.keymap.set('n', '<leader>sd', builtin.lsp_definitions, { desc = 'LSP Definitions' })
       vim.keymap.set('n', '<leader>sr', builtin.lsp_references, { desc = 'LSP References' })
-      vim.keymap.set('n', '<leader>si', builtin.lsp_implementations, { desc = 'LSP Implementations' })
+      vim.keymap.set('n', '<leader>sI', builtin.lsp_implementations, { desc = 'LSP Implementations' })
       vim.keymap.set('n', '<leader>ss', builtin.lsp_document_symbols, { desc = 'Document Symbols' })
 
       -- Others

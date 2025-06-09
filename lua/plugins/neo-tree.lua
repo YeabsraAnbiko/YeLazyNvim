@@ -242,7 +242,7 @@ return {
         },
       })
 
-      vim.keymap.set("n", "<leader>e", "<cmd>Neotree reveal<CR>", { desc = "Toggle Neo-tree" })
+      vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<CR>", { desc = "Toggle Neo-tree" })
     end,
   },
 }
