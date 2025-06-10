@@ -8,6 +8,17 @@ vim.opt.expandtab = true     -- Convert tabs to spaces
 vim.opt.autoindent = true    -- Copy indent from current line
 vim.opt.smartindent = true   -- Enable smart indentation for better formatting
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "lua",
+  callback = function()
+    vim.opt_local.shiftwidth = 2
+    vim.opt_local.tabstop = 2
+    vim.opt_local.softtabstop = 2
+    vim.opt_local.expandtab = true
+  end,
+})
+
+
 vim.opt.shortmess:append("I")
 vim.opt.laststatus=3
 -- vim.o.winbar="%=%m 📁%f"
@@ -60,20 +71,20 @@ vim.opt.foldcolumn="auto"
 
 
 vim.api.nvim_create_autocmd("TextYankPost", {
-desc = "Highlight when yanking (copying) text",
-group = vim.api.nvim_create_augroup("kickstart-highlight-yank", {clear = true}),
-callback = function()
+  desc = "Highlight when yanking (copying) text",
+  group = vim.api.nvim_create_augroup("kickstart-highlight-yank", {clear = true}),
+  callback = function()
     vim.highlight.on_yank()
-end,
+  end,
 })
 
 vim.diagnostic.config({
-    signs = {
-        text = {
-            [vim.diagnostic.severity.ERROR] = '',
-            [vim.diagnostic.severity.WARN] = '',
-            [vim.diagnostic.severity.INFO] = '',
-            [vim.diagnostic.severity.HINT] = '󰌵',
-        },
-    }
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = '',
+      [vim.diagnostic.severity.WARN] = '',
+      [vim.diagnostic.severity.INFO] = '',
+      [vim.diagnostic.severity.HINT] = '󰌵',
+    },
+  }
 })

@@ -37,16 +37,16 @@ return {
         pickers = {},
         extensions = {
           ["ui-select"] = {
-              require("telescope.themes").get_dropdown({
-                  winblend = 10,
-                  prompt_title = false,
-                  results_title = false,
-                  sorting_strategy = "ascending",
-                  layout_config = {
-                      width = 0.4,
-                      height = 0.3,
-                  },
-              })
+            require("telescope.themes").get_dropdown({
+              winblend = 10,
+              prompt_title = false,
+              results_title = false,
+              sorting_strategy = "ascending",
+              layout_config = {
+                width = 0.4,
+                height = 0.3,
+              },
+            })
           },
         },
       })
@@ -58,56 +58,56 @@ return {
 
       -- File Search
       vim.keymap.set('n', '<leader>ff', function() builtin.find_files({
-          layout_config = {
-              prompt_position = "top",
-          }
+        layout_config = {
+          prompt_position = "top",
+        }
       }) end, { desc = 'Find Files' })
       vim.keymap.set('n', '<leader>fh', builtin.oldfiles, { desc = 'Recent Files' })
       vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Buffers' })
       vim.keymap.set('n', '<leader>fg',function () builtin.live_grep({
-          layout_config = {
-              prompt_position = "top",
-          }
+        layout_config = {
+          prompt_position = "top",
+        }
 
       }) end, { desc = 'Live Grep' })
       vim.keymap.set('n', '<leader>ll',function() builtin.current_buffer_fuzzy_find({
-          layout_config = {
-              prompt_position = "top",
-          }
+        layout_config = {
+          prompt_position = "top",
+        }
 
       }) end, { desc = 'Fuzzy Current Buffer' })
       vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = 'Resume Last Search' })
 
       -- Git
       vim.keymap.set('n', '<leader>Gf', function() builtin.git_files({
-          layout_config = {
-              prompt_position = "top",
-          }
+        layout_config = {
+          prompt_position = "top",
+        }
 
 
       }) end, { desc = 'Git Files' })
       vim.keymap.set('n', '<leader>Gl', function() builtin.git_commits({
-          layout_config = {
-              prompt_position = "top",
-          }
+        layout_config = {
+          prompt_position = "top",
+        }
 
       }) end, { desc = 'Git Commits' })
       vim.keymap.set('n', '<leader>Gd', function() builtin.git_bcommits({
-          layout_config = {
-              prompt_position = "top",
-          }
+        layout_config = {
+          prompt_position = "top",
+        }
 
       }) end, { desc = 'Git Buffer Commits' })
       vim.keymap.set('n', '<leader>Gs', function() builtin.git_status({
-          layout_config = {
-              prompt_position = "top",
-          }
+        layout_config = {
+          prompt_position = "top",
+        }
 
       }) end, { desc = 'Git Status' })
       vim.keymap.set('n', '<leader>Gb', function() builtin.git_branches({
-          layout_config = {
-              prompt_position = "top",
-          }
+        layout_config = {
+          prompt_position = "top",
+        }
 
       }) end, { desc = 'Git Branches' })
 
@@ -123,14 +123,14 @@ return {
       vim.keymap.set('n', '<leader>vo', builtin.vim_options, { desc = 'Vim Options' })
       vim.keymap.set('n', '<leader>cm', builtin.commands, { desc = 'Commands' })
       vim.keymap.set('n', '<leader>sh',function() builtin.help_tags({
-          layout_config = {
-              prompt_position = "top",
-          }
+        layout_config = {
+          prompt_position = "top",
+        }
       }) end, { desc = 'Help Tags' })
       vim.keymap.set('n', '<leader>sm',function() builtin.man_pages({
-          layout_config = {
-              prompt_position = "top",
-          }
+        layout_config = {
+          prompt_position = "top",
+        }
       }) end, { desc = 'Man Pages' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = 'Search Keymaps' })
     end

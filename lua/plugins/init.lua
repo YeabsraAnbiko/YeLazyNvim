@@ -1,20 +1,4 @@
-local plugin_files = {
-    "colorscheme",
-    "lualine",
-    "autotag-autopairs",
-    "git_and_undo",
-    "lsp-cmp-mason",
-    "telescope",
-    "dap",
-    "tmux",
-    "neo-tree",
-    "indent-blinkline",
-    "colorizer",
-    "bufferline",
-    "noice",
-    "treesitter",
-
-}
+local plugin_files = {}
 
 local plugins = {}
 for _, file in ipairs(plugin_files) do

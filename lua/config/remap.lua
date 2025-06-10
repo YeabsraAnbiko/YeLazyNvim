@@ -21,12 +21,12 @@ vim.keymap.set("n", "<leader>/", ":set hlsearch!<CR>", opts)
 
 -- Auto-store yanked text in register 'a' and Paste from register 'a'
 vim.api.nvim_create_autocmd("TextYankPost", {
-    pattern = "*",
-    callback = function()
-        if vim.v.event.operator == "y" then
-            vim.fn.setreg("a", vim.fn.getreg("\""))
-        end
+  pattern = "*",
+  callback = function()
+    if vim.v.event.operator == "y" then
+      vim.fn.setreg("a", vim.fn.getreg("\""))
     end
+  end
 })
 vim.keymap.set("n", "<leader>p", '"ap', opts)
 

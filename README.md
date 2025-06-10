@@ -1,72 +1,112 @@
 # YeLazyNvim
 
-This is my custom Neovim configuration powered by `lazy.nvim`. The setup includes various plugins and settings that enhance productivity and development experience in Neovim.
+YeLazyNvim is a modular, clean, and performant Neovim configuration built with [lazy.nvim](https://github.com/folke/lazy.nvim). It’s designed for developers who want a powerful yet minimal setup.
 
-## Features
+---
 
-- **lazy.nvim** for plugin management
-- Pre-configured settings for a seamless Neovim experience
-- Support for essential plugins for code editing, file navigation, and LSP integration
+## ✨ Highlights
 
-## Installation
+- **Modular Design**: Plugins and settings are organized thematically (e.g., `dap.lua`, `lsp.lua`, `git_and_undo.lua`).
+- **Well-Chosen Plugins**: Includes top-tier plugins like Telescope, Treesitter, LSP, CMP, DAP, and more.
+- **Thoughtful Configuration**: Keybindings, styling, format-on-save, breadcrumbs (via `nvim-navic`), and rich UI polish.
+- **Performance-Oriented**: Uses lazy-loading (`event = "VeryLazy"` or `BufReadPost`) for fast startup and responsiveness.
 
-1. Clone the repository into your `~/.config/nvim` directory:
+---
 
-   ```bash
-   git clone https://github.com/YeabsraAnbiko/YeLazyNvim ~/.config/nvim
-2. Open Neovim and run the following command to install the plugins:
+## 🚀 Installation
 
-   ```vim
-    :Lazy sync
+Clone this repo into your Neovim config folder:
 
-## Customization
-You can customize the Neovim configuration by modifying the files inside the lua/ directory. These files contain various settings and plugin configurations that you can tweak to your liking.
+```bash
+git clone https://github.com/YeabsraAnbiko/YeLazyNvim ~/.config/nvim
 
-## Lua Configuration
-The main configuration files are located in lua/config/ and lua/plugins/. Feel free to modify the settings according to your preferences.
+# YeLazyNvim Configuration Overview
 
-## Plugins
-This setup uses lazy.nvim to manage plugins. You can easily add, remove, or update plugins in the lua/ directory.
+## 🛠️ Customization
 
-## Plugins Included
+Edit files inside `~/.config/nvim/lua/plugins/` and `~/.config/nvim/lua/config/` for:
 
-This Neovim setup includes a curated set of plugins managed by [lazy.nvim](https://github.com/folke/lazy.nvim), aimed at improving your development workflow:
+- Keybindings
+- Plugin configurations
+- LSP server setup
+- UI theming
+
+---
+
+## 🧠 Plugin Breakdown
 
 ### Plugin Manager
-- **lazy.nvim**: The plugin manager used to handle all other plugins.
+- **lazy.nvim**: Declarative and efficient plugin loader
 
-### UI Enhancements
-- **rose-pine**: A warm, modern colorscheme with support for various plugins and terminals.
-- **lualine.nvim**: A fast and beautiful statusline written in Lua, with icon support via `nvim-web-devicons`.
+### UI & UX
+- **rose-pine**: Beautiful and modern theme  
+- **lualine.nvim**: Fast statusline  
+- **bufferline.nvim**: Tabline with buffer indicators  
+- **noice.nvim**: Enhanced command line and LSP UIs  
+- **nvim-navic**: Breadcrumbs from LSP symbols  
+- **nvim-colorizer.lua**: Highlights color codes  
 
-### Fuzzy Finding
-- **telescope.nvim**: A powerful fuzzy finder over lists (files, buffers, LSP symbols, etc.), requires `plenary.nvim`.
+### Navigation & Search
+- **telescope.nvim**: Finder over files, LSP, buffers  
+- **neo-tree.nvim**: Tree-based file explorer  
+- **vim-tmux-navigator**: Seamless window nav with tmux  
 
-### Git Integration and History
-- **vim-fugitive**: A Git wrapper providing powerful Git commands from within Neovim.
-- **vim-gitgutter**: Shows Git diff indicators in the sign column.
-- **undotree**: Visualizes the undo history in a tree format.
+### Git & Undo History
+- **vim-fugitive**: Full Git CLI in Neovim  
+- **gitsigns.nvim**: Git diff signs in gutter  
+- **undotree**: Undo history visualization  
 
-### LSP, Syntax Highlighting, and Language Support
-- **nvim-lspconfig**: Configures built-in LSP client for various programming languages.
-- **nvim-treesitter**: Provides better syntax highlighting and parsing through tree-sitter.
-- **mason.nvim** & **mason-lspconfig.nvim**: Easy installation and configuration of LSP servers and related tooling.
+### LSP & Tools
+- **nvim-lspconfig**: Easy LSP server config  
+- **mason.nvim**: Install LSP servers and tools  
+- **mason-lspconfig.nvim**: Mason + LSP bridge  
+- **nvim-navic**: Breadcrumbs from LSP symbols  
+- Format-on-save, diagnostics, hover, rename, and more  
 
-### Autocompletion and Editing
-- **nvim-cmp**: Completion engine for Neovim.
-- **cmp-nvim-lsp**: LSP source for `nvim-cmp`.
-- **nvim-ts-autotag**: Automatically close and rename HTML tags using Tree-sitter.
-- **mini.pairs**: Lightweight plugin to auto-pair brackets, quotes, etc.
+### Autocompletion
+- **nvim-cmp**: Completion engine  
+- **cmp-nvim-lsp**: LSP source for cmp  
+- **cmp-path, cmp-buffer, cmp_luasnip**  
+- **LuaSnip**: Snippet engine  
+- **mini.pairs**: Auto-pairing  
 
-### Debuggers
--nvim-dap
--nvim-dap-ui
+### Syntax & Structure
+- **nvim-treesitter**: Syntax-aware parsing and highlighting  
+- **nvim-ts-autotag**: Auto-close/rename HTML tags  
 
-## License
-MIT License. See LICENSE for details.
+### Debugging
+- **nvim-dap**: Debug Adapter Protocol support  
+- **nvim-dap-ui**: Visual DAP controls  
 
-## Credits
-- [lazy.nvim](https://github.com/folke/lazy.nvim)
-- [Neovim](https://github.com/neovim/neovim)
+---
 
-## Feel free to fork, clone, and contribute to this configuration!
+## 🧩 Structure
+
+```bash
+~/.config/nvim/
+├── lua/
+│   ├── config/          # General settings (keymaps, options)
+│   └── plugins/         # All plugin specs (modular)
+├── init.lua             # Entry point for lazy.nvim
+└── README.md            # This file
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License**. See the `LICENSE` file for full details.
+
+---
+
+## 🙌 Credits
+
+Special thanks to the amazing authors and maintainers of:
+
+- [lazy.nvim](https://github.com/folke/lazy.nvim)  
+- [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)  
+- [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)  
+- [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)  
+
+
+
+Feel free to fork, clone, and contribute to make YeLazyNvim even better!
+
