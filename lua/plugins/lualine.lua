@@ -11,7 +11,7 @@ return {
       require('lualine').setup {
         options = {
           icons_enabled = true,
-          theme = 'catppuccin', -- or any other theme you prefer
+          theme = 'auto', -- or any other theme you prefer
           component_separators = { left = '', right = ''},
           section_separators = { left = '', right = ''},
           always_divide_middle = true,

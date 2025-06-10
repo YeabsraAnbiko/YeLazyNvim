@@ -19,6 +19,7 @@ Clone this repo into your Neovim config folder:
 
 ```bash
 git clone https://github.com/YeabsraAnbiko/YeLazyNvim ~/.config/nvim
+```
 
 # YeLazyNvim Configuration Overview
 
@@ -89,6 +90,7 @@ Edit files inside `~/.config/nvim/lua/plugins/` and `~/.config/nvim/lua/config/`
 │   └── plugins/         # All plugin specs (modular)
 ├── init.lua             # Entry point for lazy.nvim
 └── README.md            # This file
+```
 ---
 
 ## 📄 License
