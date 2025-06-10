@@ -12,6 +12,7 @@ local plugin_files = {
     "colorizer",
     "bufferline",
     "noice",
+    "treesitter",
 
 }
 

@@ -8,7 +8,7 @@ return {
             require('lualine').setup {
                 options = {
                     icons_enabled = true,
-                    theme = 'auto', -- powerline_dark , horizon, 'rose-pine' and etc
+                    theme = 'catppuccin', -- powerline_dark , horizon, 'rose-pine, tokyonight and etc
                     component_separators = { left = '', right = ''},
                     section_separators = { left = '', right = ''},
                     always_divide_middle = true,
