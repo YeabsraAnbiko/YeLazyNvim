@@ -56,6 +56,7 @@ Edit files inside `~/.config/nvim/lua/plugins/` and `~/.config/nvim/lua/config/`
 - **vim-fugitive**: Full Git CLI in Neovim  
 - **gitsigns.nvim**: Git diff signs in gutter  
 - **undotree**: Undo history visualization  
+- **LazyGit.nvim**: lazygit ui inside Neovim
 
 ### LSP & Tools
 - **nvim-lspconfig**: Easy LSP server config  
