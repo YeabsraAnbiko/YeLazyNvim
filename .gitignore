@@ -59,3 +59,4 @@ build/
 *.class
 *.exe
 
+.luarc.json

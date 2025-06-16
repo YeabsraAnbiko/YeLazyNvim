@@ -28,11 +28,14 @@ return {
               ["<C-j>"] = actions.move_selection_next,
               ["<C-k>"] = actions.move_selection_previous,
               ["<c-c>"] = actions.close,
+              ["<Down>"] = require('telescope.actions').cycle_history_next,
+              ["<Up>"] = require('telescope.actions').cycle_history_prev,
             },
             n = {
               ["q"] = actions.close,
             }
           },
+          path_display = {"filename_first"}
         },
         pickers = {},
         extensions = {
@@ -58,6 +61,8 @@ return {
 
       -- File Search
       vim.keymap.set('n', '<leader>ff', function() builtin.find_files({
+        no_ignore = true,
+        hidden = true,
         layout_config = {
           prompt_position = "top",
         }
@@ -112,7 +117,11 @@ return {
       }) end, { desc = 'Git Branches' })
 
       -- LSP 
-      -- vim.keymap.set('n', '<leader>sd', builtin.lsp_definitions, { desc = 'LSP Definitions' })
+      vim.keymap.set('n', '<leader>sd', function()
+        builtin.lsp_definitions({
+          jump_type =  {"split",}
+        })
+      end, { desc = 'LSP Definitions' })
       vim.keymap.set('n', '<leader>ss', builtin.lsp_document_symbols, { desc = 'Document Symbols' })
 
       -- Others
