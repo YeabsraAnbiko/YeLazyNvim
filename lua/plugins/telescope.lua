@@ -41,7 +41,7 @@ return {
         extensions = {
           ["ui-select"] = {
             require("telescope.themes").get_dropdown({
-              winblend = 10,
+              winblend = 35,
               prompt_title = false,
               results_title = false,
               sorting_strategy = "ascending",

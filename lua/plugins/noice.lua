@@ -5,13 +5,12 @@ return {
     dependencies = {
       "MunifTanjim/nui.nvim",
       "rcarriga/nvim-notify",
-      "SmiteshP/nvim-navic", -- ✨ Add navic as dependency
+      "SmiteshP/nvim-navic",
     },
     opts = {
       lsp = {
         progress = {
           enabled = true,
-          -- ✨ Enable integration with navic
           format = "lsp_progress",
           format_done = "lsp_progress_done",
           throttle = 1000,
