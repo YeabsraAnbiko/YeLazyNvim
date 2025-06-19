@@ -7,7 +7,7 @@ return {
       "hrsh7th/cmp-nvim-lsp",
     },
     config = function()
-      -- Global keymaps for LSP
+      -- Global LSP keymaps
       vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition" })
       vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to Declaration" })
       vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename" })
@@ -17,8 +17,17 @@ return {
       vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Prev Diagnostic" })
       vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next Diagnostic" })
       vim.keymap.set("n", "<leader>di", vim.diagnostic.open_float, { desc = "Diagnostic Info" })
+      vim.keymap.set("n", "<leader>fd", vim.lsp.buf.format, { desc = "Format Document" })
 
-      -- Global LSP diagnostics config
+      -- Toggle virtual text diagnostics
+      local virtual_text_enabled = true
+      vim.keymap.set("n", "<leader>vt", function()
+        virtual_text_enabled = not virtual_text_enabled
+        vim.diagnostic.config({ virtual_text = virtual_text_enabled })
+        print("Diagnostics virtual text " .. (virtual_text_enabled and "enabled" or "disabled"))
+      end, { desc = "Toggle Diagnostics Virtual Text" })
+
+      -- Diagnostics config
       vim.opt.signcolumn = "yes"
       vim.diagnostic.config({
         virtual_text = true,

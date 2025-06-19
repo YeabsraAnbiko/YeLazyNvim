@@ -1,3 +1,4 @@
+-- ~/.config/nvim/lua/plugins/mason.lua + mason-lspconfig with enhanced handlers
 return {
   -- Mason core
   {
@@ -15,7 +16,7 @@ return {
     },
   },
 
-  -- Mason LSPconfig integration with handlers and ensured servers
+  -- Mason LSPconfig integration
   {
     "williamboman/mason-lspconfig.nvim",
     lazy = false,
@@ -25,6 +26,8 @@ return {
     },
     opts = function()
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
+      capabilities.textDocument.completion.completionItem.snippetSupport = true
+
       local navic = require("nvim-navic")
       local lspconfig = require("lspconfig")
 
@@ -33,6 +36,22 @@ return {
           navic.attach(client, bufnr)
         end
 
+        -- Document Highlighting
+        if client.server_capabilities.documentHighlightProvider then
+          vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
+          vim.api.nvim_create_autocmd("CursorHold", {
+            group = "lsp_document_highlight",
+            buffer = bufnr,
+            callback = vim.lsp.buf.document_highlight,
+          })
+          vim.api.nvim_create_autocmd("CursorMoved", {
+            group = "lsp_document_highlight",
+            buffer = bufnr,
+            callback = vim.lsp.buf.clear_references,
+          })
+        end
+
+        -- Format on save
         if client.supports_method("textDocument/formatting") then
           vim.api.nvim_create_autocmd("BufWritePre", {
             buffer = bufnr,
@@ -48,6 +67,9 @@ return {
           lspconfig[server_name].setup({
             capabilities = capabilities,
             on_attach = on_attach,
+            flags = {
+              debounce_text_changes = 150,
+            },
           })
         end,
 
@@ -55,6 +77,7 @@ return {
           lspconfig.tailwindcss.setup({
             capabilities = capabilities,
             on_attach = on_attach,
+            flags = { debounce_text_changes = 150 },
             settings = {
               tailwindCSS = {
                 experimental = {
@@ -69,7 +92,7 @@ return {
             },
             filetypes = {
               "html", "javascript", "typescript", "javascriptreact",
-              "typescriptreact", "svelte", "vue", "php", "blade"
+              "typescriptreact", "svelte", "vue", "php", "blade",
             },
             root_dir = lspconfig.util.root_pattern(
               "tailwind.config.js", "tailwind.config.ts", "postcss.config.js",
@@ -82,10 +105,42 @@ return {
           lspconfig.lua_ls.setup({
             capabilities = capabilities,
             on_attach = on_attach,
+            flags = { debounce_text_changes = 150 },
             settings = {
               Lua = {
                 diagnostics = {
                   globals = { "vim" },
+                },
+                workspace = {
+                  library = vim.api.nvim_get_runtime_file("", true),
+                  checkThirdParty = false,
+                },
+                telemetry = { enable = false },
+              },
+            },
+          })
+        end,
+
+        ["ltex"] = function()
+          require("lspconfig").ltex.setup({
+            capabilities = capabilities,
+            on_attach = function(client, bufnr)
+              if client.supports_method("textDocument/formatting") then
+                vim.api.nvim_create_autocmd("BufWritePre", {
+                  buffer = bufnr,
+                  callback = function()
+                    vim.lsp.buf.format({ async = false })
+                  end,
+                })
+              end
+            end,
+            filetypes = { "markdown", "text", "latex" },
+            settings = {
+              ltex = {
+                language = "en",
+                enabled = { "markdown", "text", "latex" },
+                dictionary = {
+                  ["en"] = { "neovim", "lsp", "config" },
                 },
               },
             },
@@ -95,9 +150,9 @@ return {
 
       return {
         ensure_installed = {
-          "lua_ls", "emmet_language_server", "clangd", "bashls", "cssls",
-          "html", "vtsls", "jsonls", "marksman", "pyright", "pylsp",
-          "sqlls", "vimls", "grammarly",
+          "lua_ls", "clangd", "bashls", "cssls", "tailwindcss",
+          "html", "ts_ls", "jsonls", "marksman", "pyright",
+          "sqlls", "vimls", "ltex",
         },
         handlers = handlers,
       }
