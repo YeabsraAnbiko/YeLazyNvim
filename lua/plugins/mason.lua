@@ -1,4 +1,3 @@
--- ~/.config/nvim/lua/plugins/mason.lua + mason-lspconfig with enhanced handlers
 return {
   -- Mason core
   {
@@ -120,6 +119,22 @@ return {
             },
           })
         end,
+        ["emmet_ls"] = function()
+          require("lspconfig").emmet_ls.setup({
+            capabilities = capabilities,
+            on_attach = on_attach,
+            filetypes = {
+              "html", "css", "scss", "javascriptreact", "typescriptreact", "vue", "svelte", "xml"
+            },
+            init_options = {
+              html = {
+                options = {
+                  ["bem.enabled"] = true,
+                },
+              },
+            },
+          })
+        end,
 
         ["ltex"] = function()
           require("lspconfig").ltex.setup({
@@ -152,7 +167,7 @@ return {
         ensure_installed = {
           "lua_ls", "clangd", "bashls", "cssls", "tailwindcss",
           "html", "ts_ls", "jsonls", "marksman", "pyright",
-          "sqlls", "vimls", "ltex",
+          "sqlls", "vimls", "ltex", "emmet_ls",
         },
         handlers = handlers,
       }

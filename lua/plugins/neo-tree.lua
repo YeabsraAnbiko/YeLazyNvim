@@ -18,7 +18,6 @@ return {
       "MunifTanjim/nui.nvim",
       {
         "s1n7ax/nvim-window-picker",
-        version = "2.*",
         config = function()
           require("window-picker").setup({
             filter_rules = {
@@ -33,7 +32,7 @@ return {
         end,
       },
     },
-    lazy = false,
+    event = "VeryLazy",
     config = function()
       require("neo-tree").setup({
         close_if_last_window = false,
@@ -161,7 +160,7 @@ return {
           },
           group_empty_dirs = false,
           hijack_netrw_behavior = "open_default",
-          use_libuv_file_watcher = false,
+          use_libuv_file_watcher = true,
           window = {
             mappings = {
               ["<bs>"] = "navigate_up",
