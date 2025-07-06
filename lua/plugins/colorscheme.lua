@@ -7,7 +7,7 @@ return {
     lazy = false,
     config = function()
       require("rose-pine").setup({
-        variant = "moon", -- options: "main" (default), "moon", "dawn"
+        variant = "main", -- options: "main" (default), "moon", "dawn"
         dark_variant = "moon",
         dim_inactive_windows = true,
         extend_background_behind_borders = true,

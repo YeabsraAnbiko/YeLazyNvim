@@ -9,6 +9,10 @@ return {
       highlight = true,
       separator = " > ",
       depth_limit = 0,
+      lsp = {
+        auto_attach = true,
+        preference = nil,
+      },
       icons = {
         File = "󰈙 ",
         Module = " ",

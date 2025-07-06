@@ -12,8 +12,8 @@ return {
         options = {
           icons_enabled = true,
           theme = 'auto', -- or any other theme you prefer
-          component_separators = { left = '', right = ''},
-          section_separators = { left = '', right = ''},
+          component_separators = { left = '', right = '' },
+          section_separators = { left = '', right = '' },
           always_divide_middle = true,
           globalstatus = true,
           refresh = {
@@ -22,9 +22,7 @@ return {
             winbar = 100,
           }
         },
-        sections = {
-          lualine_a = { 'mode' },
-          lualine_b = { 'branch', 'diff', 'diagnostics' },
+        winbar = {
           lualine_c = {
             {
               function()
@@ -35,6 +33,11 @@ return {
               end
             }
           },
+        },
+        sections = {
+          lualine_a = { 'mode' },
+          lualine_b = { 'branch', 'diff', 'diagnostics' },
+          lualine_c = { 'lsp_status' },
           lualine_x = { 'encoding', 'fileformat', 'filetype' },
           lualine_y = { 'progress' },
           lualine_z = { 'location' },
