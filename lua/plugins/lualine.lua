@@ -23,6 +23,7 @@ return {
           }
         },
         winbar = {
+          lualine_b = { 'lsp_status' },
           lualine_c = {
             {
               function()
@@ -36,8 +37,8 @@ return {
         },
         sections = {
           lualine_a = { 'mode' },
-          lualine_b = { 'branch', 'diff', 'diagnostics' },
-          lualine_c = { 'lsp_status' },
+          lualine_b = { 'branch', 'diff' },
+          lualine_c = { 'diagnostics' },
           lualine_x = { 'encoding', 'fileformat', 'filetype' },
           lualine_y = { 'progress' },
           lualine_z = { 'location' },
@@ -54,4 +55,3 @@ return {
     end
   }
 }
-
