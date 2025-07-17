@@ -61,7 +61,6 @@ return {
 
       -- File Search
       vim.keymap.set('n', '<leader>ff', function() builtin.find_files({
-        no_ignore = true,
         hidden = true,
         layout_config = {
           prompt_position = "top",
