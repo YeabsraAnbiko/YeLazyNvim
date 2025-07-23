@@ -52,6 +52,7 @@ return {
           { name = "luasnip" },
           { name = "path" },
           { name = "buffer" },
+          { name = "copilot" },
         }),
       })
     end,
@@ -68,4 +69,3 @@ return {
     end
   },
 }
-
