@@ -12,8 +12,9 @@ return {
         options = {
           icons_enabled = true,
           theme = 'auto', -- or any other theme you prefer
-          component_separators = { left = '', right = '' },
-          section_separators = { left = '', right = '' },
+          -- component_separators = { left = '', right = '' },
+          component_separators = { left = '│', right = '│' },
+          section_separators = { left = '', right = '' },
           always_divide_middle = true,
           globalstatus = true,
           refresh = {
