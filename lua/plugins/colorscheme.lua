@@ -1,33 +1,44 @@
 return {
   {
-    "rose-pine/neovim",
-    name = "rose-pine",
-    priority = 1000, -- load early
-    enabled = true,
+    "folke/tokyonight.nvim",
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
+
     lazy = false,
-    config = function()
-      require("rose-pine").setup({
-        variant = "main", -- options: "main" (default), "moon", "dawn"
-        dark_variant = "moon",
-        dim_inactive_windows = true,
-        extend_background_behind_borders = true,
+    priority = 1000,
+    opts = {
+      style = "night",
+      transparent = false,
+      terminal_colors = true,
+      styles = {
+        comments = { italic = true },
+        keywords = { italic = true },
+        functions = {},
+        variables = {},
+        sidebars = "dark",
+        floats = "dark",
+      },
+    },
+    config = function(_, opts)
+      require("tokyonight").setup(opts)
+      vim.cmd.colorscheme("tokyonight")
 
-        styles = {
-          bold = true,
-          italic = true,
-          transparency = false,
-        },
+      -- Customize split characters
+      vim.opt.fillchars = {
+        vert = "│", -- vertical split
+        horiz = "─", -- horizontal split
+        horizup = "┴",
+        horizdown = "┬",
+        vertleft = "┤",
+        vertright = "├",
+        verthoriz = "┼",
+      }
 
-        highlight_groups = {
-          -- Customize UI elements
-          VertSplit = { fg = "highlight_high", bg = "none" },
-          WinSeparator = { fg = "highlight_high", bg = "none" },
-          CursorLine = { bg = "surface" },
-        },
-      })
+      vim.cmd(" highlight WinSeparator guibg=NONE guifg=#7aa2f7 ")
 
-      vim.cmd.colorscheme("rose-pine")
+      -- Enable separate highlight for inactive windows (optional)
+      vim.opt.winhighlight = "WinSeparator:WinSeparator"
     end,
   },
 }
-
