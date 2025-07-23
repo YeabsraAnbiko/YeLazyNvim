@@ -1,8 +1,28 @@
 return {
   {
-    'tpope/vim-fugitive',
+    "sindrets/diffview.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    keys = {
+      { "<leader>dv", "<cmd>DiffviewOpen<CR>", desc = "Open Git Diff" },
+    },
+    config = function()
+      require("diffview").setup({
+        enhanced_diff_hl = true,
+        use_icons = true,
+        file_panel = {
+          win_config = {
+            position = "left",
+            width = 35,
+          },
+        },
+        view = {
+          merge_tool = {
+            layout = "diff3_mixed",
+          },
+        },
+      })
+    end,
   },
-
   {
     "lewis6991/gitsigns.nvim",
     event = { "BufReadPre", "BufNewFile" },
@@ -10,26 +30,26 @@ return {
       local gs = require("gitsigns")
 
       gs.setup({
-        signs = {
-          add =    { text = "▎" },
+        signs                   = {
+          add = { text = "▎" },
           change = { text = "▎" },
           delete = { text = "▎" },
           topdelete = { text = "‾" },
           changedelete = { text = "~" },
           untracked = { text = "┆" },
         },
-        signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
-        numhl      = false, -- Toggle with `:Gitsigns toggle_numhl`
-        linehl     = false, -- Toggle with `:Gitsigns toggle_linehl`
-        word_diff  = false, -- Toggle with `:Gitsigns toggle_word_diff`
-        current_line_blame = true,
+        signcolumn              = true,  -- Toggle with `:Gitsigns toggle_signs`
+        numhl                   = false, -- Toggle with `:Gitsigns toggle_numhl`
+        linehl                  = false, -- Toggle with `:Gitsigns toggle_linehl`
+        word_diff               = false, -- Toggle with `:Gitsigns toggle_word_diff`
+        current_line_blame      = true,
         current_line_blame_opts = {
           virt_text = true,
           virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
           delay = 100,
           ignore_whitespace = false,
         },
-        on_attach = function(bufnr)
+        on_attach               = function(bufnr)
           local function map(mode, lhs, rhs, desc)
             vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc })
           end
@@ -50,8 +70,10 @@ return {
           -- Actions
           map("n", "<leader>hs", gs.stage_hunk, "Stage hunk")
           map("n", "<leader>hr", gs.reset_hunk, "Reset hunk")
-          map("v", "<leader>hs", function() gs.stage_hunk {vim.fn.line("."), vim.fn.line("v")} end, "Stage hunk (visual)")
-          map("v", "<leader>hr", function() gs.reset_hunk {vim.fn.line("."), vim.fn.line("v")} end, "Reset hunk (visual)")
+          map("v", "<leader>hs", function() gs.stage_hunk { vim.fn.line("."), vim.fn.line("v") } end,
+            "Stage hunk (visual)")
+          map("v", "<leader>hr", function() gs.reset_hunk { vim.fn.line("."), vim.fn.line("v") } end,
+            "Reset hunk (visual)")
           map("n", "<leader>hS", gs.stage_buffer, "Stage buffer")
           map("n", "<leader>hu", gs.undo_stage_hunk, "Undo stage hunk")
           map("n", "<leader>hR", gs.reset_buffer, "Reset buffer")
@@ -84,6 +106,3 @@ return {
     },
   }
 }
-
-
-
