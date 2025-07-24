@@ -1,6 +1,6 @@
 # YeLazyNvim
 
-YeLazyNvim is a modular, clean, and performant Neovim configuration built with [lazy.nvim](https://github.com/folke/lazy.nvim). It’s designed for developers who want a powerful yet minimal setup.
+YeLazyNvim is a modular, clean, and performant Neovim configuration built with [lazy.nvim](https://github.com/folke/lazy.nvim). It’s designed for developers who want a powerful and easy setup.
 
 ---
 
@@ -8,7 +8,7 @@ YeLazyNvim is a modular, clean, and performant Neovim configuration built with [
 
 - **Modular Design**: Plugins and settings are organized thematically (e.g., `dap.lua`, `lsp.lua`, `git_and_undo.lua`).
 - **Well-Chosen Plugins**: Includes top-tier plugins like Telescope, Treesitter, LSP, CMP, DAP, and more.
-- **Thoughtful Configuration**: Keybindings, styling, format-on-save, breadcrumbs (via `nvim-navic`), and rich UI polish.
+- **Thoughtful Configuration**: Keybindings, styling, breadcrumbs (via `nvim-navic`), and rich UI polish.
 - **Performance-Oriented**: Uses lazy-loading (`event = "VeryLazy"` or `BufReadPost`) for fast startup and responsiveness.
 
 ---
@@ -40,32 +40,42 @@ Edit files inside `~/.config/nvim/lua/plugins/` and `~/.config/nvim/lua/config/`
 - **lazy.nvim**: Declarative and efficient plugin loader
 
 ### UI & UX
-- **rose-pine**: Beautiful and modern theme  
+- Tokyonight: Beautiful and modern theme  
 - **lualine.nvim**: Fast statusline  
 - **bufferline.nvim**: Tabline with buffer indicators  
 - **noice.nvim**: Enhanced command line and LSP UIs  
 - **nvim-navic**: Breadcrumbs from LSP symbols  
 - **nvim-colorizer.lua**: Highlights color codes  
+- **nvim-web-devicons**: File icons for Neovim
+- **indent-blankline.nvim**: Indentation guides
+- **gitsigns.nvim**: Git diff signs in the gutter
+- **lspkind.nvim**: LSP icons for diagnostics and code actions
+- **noice.nvim**: Enhanced command line and LSP UIs
+- **nvim-notify**: Notification system for Neovim
+- **telescope-ui-select.nvim**: Telescope UI selector
+- **diffview.nvim**: Git diff viewer
 
 ### Navigation & Search
 - **telescope.nvim**: Finder over files, LSP, buffers  
 - **neo-tree.nvim**: Tree-based file explorer  
-- **vim-tmux-navigator**: Seamless window nav with tmux  
+- **vim-tmux-navigator**: Seamless window nav with tmux ( requires tmux, if you don't use tmux, you can remove this plugin)
 
 ### Git & Undo History
-- **vim-fugitive**: Full Git CLI in Neovim  
+- **lazygit.nvim**: LazyGit UI inside Neovim
+- **diffview.nvim**: Git diff viewer
 - **gitsigns.nvim**: Git diff signs in gutter  
 - **undotree**: Undo history visualization  
-- **LazyGit.nvim**: lazygit ui inside Neovim
 
 ### LSP & Tools
 - **nvim-lspconfig**: Easy LSP server config  
 - **mason.nvim**: Install LSP servers and tools  
 - **mason-lspconfig.nvim**: Mason + LSP bridge  
 - **nvim-navic**: Breadcrumbs from LSP symbols  
-- Format-on-save, diagnostics, hover, rename, and more  
+- Diagnostics, hover, rename, and more  
 
 ### Autocompletion
+- **copilot.lua**: GitHub Copilot integration
+- **copilot-cmp**: Copilot source for nvim-cmp
 - **nvim-cmp**: Completion engine  
 - **cmp-nvim-lsp**: LSP source for cmp  
 - **cmp-path, cmp-buffer, cmp_luasnip**  
@@ -105,9 +115,6 @@ This project is licensed under the **MIT License**. See the `LICENSE` file for f
 Special thanks to the amazing authors and maintainers of:
 
 - [lazy.nvim](https://github.com/folke/lazy.nvim)  
-- [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)  
-- [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)  
-- [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)  
 
 
 
