@@ -81,10 +81,10 @@ return {
               tailwindCSS = {
                 experimental = {
                   classRegex = {
-                    { "class\\s*=\\s*\"([^\"]*)\"", 1 },
+                    { "class\\s*=\\s*\"([^\"]*)\"",     1 },
                     { "className\\s*=\\s*\"([^\"]*)\"", 1 },
-                    { "tw\\`([^`]*)\\`", 1 },
-                    { "cn\\(([^)]*)\\)", 1 },
+                    { "tw\\`([^`]*)\\`",                1 },
+                    { "cn\\(([^)]*)\\)",                1 },
                   },
                 },
               },
@@ -135,43 +135,16 @@ return {
             },
           })
         end,
-
-        ["ltex"] = function()
-          require("lspconfig").ltex.setup({
-            capabilities = capabilities,
-            on_attach = function(client, bufnr)
-              if client.supports_method("textDocument/formatting") then
-                vim.api.nvim_create_autocmd("BufWritePre", {
-                  buffer = bufnr,
-                  callback = function()
-                    vim.lsp.buf.format({ async = false })
-                  end,
-                })
-              end
-            end,
-            filetypes = { "markdown", "text", "latex" },
-            settings = {
-              ltex = {
-                language = "en",
-                enabled = { "markdown", "text", "latex" },
-                dictionary = {
-                  ["en"] = { "neovim", "lsp", "config" },
-                },
-              },
-            },
-          })
-        end,
       }
 
       return {
         ensure_installed = {
           "lua_ls", "clangd", "bashls", "cssls", "tailwindcss",
           "html", "ts_ls", "jsonls", "marksman", "pyright",
-          "sqlls", "vimls", "ltex", "emmet_ls",
+          "sqlls", "vimls", "emmet_ls",
         },
         handlers = handlers,
       }
     end,
   },
 }
-
