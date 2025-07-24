@@ -5,6 +5,13 @@ return {
     event = { "BufReadPost", "BufNewFile" },
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",
+      {
+        "OXY2DEV/markview.nvim",
+        lazy = false,
+        config = function()
+          require("markview").setup {}
+        end,
+      },
     },
     config = function()
       require("nvim-treesitter.configs").setup {
