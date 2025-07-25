@@ -5,7 +5,6 @@ return {
     event = { "BufReadPost", "BufNewFile" },
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",
-      "OXY2DEV/markview.nvim",
     },
     config = function()
       require("nvim-treesitter.configs").setup {
@@ -38,30 +37,6 @@ return {
           },
         },
       }
-    end,
-  },
-  {
-    "OXY2DEV/markview.nvim",
-    lazy = false,
-    opts = {
-      markdown = {
-        enable = true,
-        parser = "markdown",
-        filetype = "markdown",
-      },
-      textobjects = {
-        enable = true,
-        parser = "markdown",
-        filetype = "markdown",
-      },
-    },
-    config = function()
-      require("markview").setup({
-        experimental = {
-          check_rtp = false,   -- disables the runtime path check entirely
-          check_rtp_message = false, -- just hides the message
-        }
-      })
     end,
   },
 }
