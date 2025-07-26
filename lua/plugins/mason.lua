@@ -100,25 +100,6 @@ return {
           })
         end,
 
-        ["lua_ls"] = function()
-          lspconfig.lua_ls.setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-            flags = { debounce_text_changes = 150 },
-            settings = {
-              Lua = {
-                diagnostics = {
-                  globals = { "vim" },
-                },
-                workspace = {
-                  library = vim.api.nvim_get_runtime_file("", true),
-                  checkThirdParty = false,
-                },
-                telemetry = { enable = false },
-              },
-            },
-          })
-        end,
         ["emmet_ls"] = function()
           require("lspconfig").emmet_ls.setup({
             capabilities = capabilities,
@@ -139,9 +120,9 @@ return {
 
       return {
         ensure_installed = {
-          "lua_ls", "clangd", "bashls", "cssls", "tailwindcss",
-          "html", "ts_ls", "jsonls", "marksman", "pyright",
-          "sqlls", "vimls", "emmet_ls",
+          "bashls", "cssls", "tailwindcss",
+          "html", "ts_ls", "jsonls", "pyright",
+          "vimls", "emmet_ls",
         },
         handlers = handlers,
       }
