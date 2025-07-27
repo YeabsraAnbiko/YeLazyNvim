@@ -19,17 +19,9 @@ vim.keymap.set("i", "<C-l>", "<C-o>:setlocal spell! spell?<CR>", opts)
 -- Toggle search highlight
 vim.keymap.set("n", "<leader>/", ":set hlsearch!<CR>", opts)
 
--- Auto-store yanked text in register 'a' and Paste from register 'a'
-vim.api.nvim_create_autocmd("TextYankPost", {
-  pattern = "*",
-  callback = function()
-    if vim.v.event.operator == "y" then
-      vim.fn.setreg("a", vim.fn.getreg("\""))
-    end
-  end
-})
-vim.keymap.set("n", "<leader>p", '"ap', opts)
-
+-- using system clipboard
+vim.keymap.set({'n', 'v', 'x'}, "<leader>p", '"+p', opts)
+vim.keymap.set({'n', 'v', 'x'}, "<leader>y", '"+y', opts)
 
 vim.keymap.set("n", "<leader>tn", ':tabnew<CR>', opts)
 vim.keymap.set("n", "<leader>tc", ':tabclose<CR>', opts)
