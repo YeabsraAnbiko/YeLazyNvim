@@ -1,25 +1,28 @@
 return {
   {
-    "sindrets/diffview.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim", -- required
+      "sindrets/diffview.nvim", -- optional but recommended
+      "nvim-telescope/telescope.nvim",
+    },
+    cmd = "Neogit",
     keys = {
-      { "<leader>dv", "<cmd>DiffviewOpen<CR>", desc = "Open Git Diff" },
+      { "<leader>gg", function() require("neogit").open() end, desc = "Open Neogit" },
     },
     config = function()
-      require("diffview").setup({
-        enhanced_diff_hl = true,
-        use_icons = true,
-        file_panel = {
-          win_config = {
-            position = "left",
-            width = 35,
-          },
+      require("neogit").setup({
+        integrations = {
+          diffview = true, -- enables diffview integration
         },
-        view = {
-          merge_tool = {
-            layout = "diff3_mixed",
-          },
+        signs = {
+          section = { "▸", "▾" },
+          item = { "▸", "▾" },
+          hunk = { "", "" },
         },
+        disable_commit_confirmation = true,
+        disable_insert_on_commit = false,
+        use_magit_keybindings = false,
       })
     end,
   },
@@ -94,15 +97,4 @@ return {
       vim.keymap.set('n', '<leader>U', vim.cmd.UndotreeToggle)
     end
   },
-
-  {
-    "kdheepak/lazygit.nvim",
-    cmd = "LazyGit",
-    keys = {
-      { "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
-    },
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-  }
 }
