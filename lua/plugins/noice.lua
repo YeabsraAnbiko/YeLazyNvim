@@ -40,7 +40,7 @@ return {
           search_up = { icon = " ", title = "" },
           filter = { pattern = "^:%s*!", icon = "$", lang = "bash" },
           lua = { pattern = { "^:%s*lua%s+", "^:%s*lua%s*=%s*", "^:%s*=%s*" }, icon = "", lang = "lua" },
-          help = { icon = "", title = "" },
+          help = { icon = "", title = "" },
         },
       },
 

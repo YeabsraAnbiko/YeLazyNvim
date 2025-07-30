@@ -19,6 +19,10 @@ return {
         sidebars = "dark",
         floats = "dark",
       },
+      sidebars = { "qf", "help", "vista_kind", "terminal", "packer" },
+      float_border = true,
+      dim_inactive = true,
+      lualine_bold = true,
     },
     config = function(_, opts)
       require("tokyonight").setup(opts)
