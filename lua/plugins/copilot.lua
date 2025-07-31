@@ -6,18 +6,24 @@ return {
     event = "InsertEnter",
     config = function()
       require("copilot").setup({
-        panel = { enabled = false, },
-        suggestion = { enabled = false, },
+        panel = { enabled = false },
+        suggestion = { enabled = false },
         filetypes = {
-          yaml = true,
-          markdown = true,
-          gitcommit = true,
+          yaml = false,
+          markdown = false,
+          help = false,
+          gitcommit = false,
+          gitrebase = false,
+          hgcommit = false,
+          svn = false,
+          cvs = false,
           sh = function()
             if string.match(vim.fs.basename(vim.api.nvim_buf_get_name(0)), '^%.env.*') then
               return false
             end
             return true
           end,
+          ["."] = false,
         },
       })
     end,
