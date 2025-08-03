@@ -95,6 +95,8 @@ return {
     'mbbill/undotree',
     config = function()
       vim.keymap.set('n', '<leader>U', vim.cmd.UndotreeToggle)
+      local home = os.getenv("HOME") or os.getenv("USERPROFILE") -- Windows fallback
+      vim.opt.undodir = home .. "/.nvim/undodir"
     end
   },
 }
