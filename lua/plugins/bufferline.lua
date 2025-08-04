@@ -35,13 +35,26 @@ return {
       enforce_regular_tabs = false,
       always_show_bufferline = true,
       sort_by = "insert_after_current", -- or "id", "extension", "relative_directory"
-      separator_style = "thin", -- "slant" | "padded_slant" | "thick" | "thin" | {"", ""}
+      separator_style = "thin",         -- "slant" | "padded_slant" | "thick" | "thin" | {"", ""}
     },
   },
   config = function(_, opts)
     require("bufferline").setup(opts)
-    vim.keymap.set("n", "<Tab>", "<cmd>BufferLineCycleNext<CR>", { desc = "Next Buffer" })
-    vim.keymap.set("n", "<S-Tab>", "<cmd>BufferLineCyclePrev<CR>", { desc = "Prev Buffer" })
   end,
+  keys = {
+    { "<leader>1",  "<cmd>BufferLineGoToBuffer 1<cr>",  desc = "Go to Buffer 1" },
+    { "<leader>2",  "<cmd>BufferLineGoToBuffer 2<cr>",  desc = "Go to Buffer 2" },
+    { "<leader>3",  "<cmd>BufferLineGoToBuffer 3<cr>",  desc = "Go to Buffer 3" },
+    { "<leader>4",  "<cmd>BufferLineGoToBuffer 4<cr>",  desc = "Go to Buffer 4" },
+    { "<leader>5",  "<cmd>BufferLineGoToBuffer 5<cr>",  desc = "Go to Buffer 5" },
+    { "<leader>6",  "<cmd>BufferLineGoToBuffer 6<cr>",  desc = "Go to Buffer 6" },
+    { "<leader>7",  "<cmd>BufferLineGoToBuffer 7<cr>",  desc = "Go to Buffer 7" },
+    { "<leader>8",  "<cmd>BufferLineGoToBuffer 8<cr>",  desc = "Go to Buffer 8" },
+    { "<leader>9",  "<cmd>BufferLineGoToBuffer 9<cr>",  desc = "Go to Buffer 9" },
+    { "<leader>$",  "<cmd>BufferLineGoToBuffer -1<cr>", desc = "Go to Last Buffer" },
+    { "<leader>bq", ":Bdelete!<CR>",                    desc = "Close Current Buffer" },
+    { "<leader>bQ", ":Bdelete! %d<CR>",                 desc = "Close Current Buffer Forcefully" },
+    { "<leader>bn", "<cmd>BufferLineCycleNext<CR>",     desc = "Next Buffer" },
+    { "<leader>bp", "<cmd>BufferLineCyclePrev<CR>",     desc = "Prev Buffer" },
+  },
 }
-

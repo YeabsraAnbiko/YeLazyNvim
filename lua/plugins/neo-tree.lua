@@ -8,6 +8,9 @@ return {
     config = function()
       require("lsp-file-operations").setup()
     end,
+    keys = {
+      { "<leader>e", "<cmd>Neotree toggle<cr>", desc = "Toggle NeoTree" },
+    },
   },
   {
     "nvim-neo-tree/neo-tree.nvim",
@@ -240,9 +243,6 @@ return {
           },
         },
       })
-
-      vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<CR>", { desc = "Toggle Neo-tree" })
     end,
   },
 }
-
