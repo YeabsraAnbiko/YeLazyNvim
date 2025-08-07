@@ -42,7 +42,6 @@ Edit files inside `~/.config/nvim/lua/plugins/` and `~/.config/nvim/lua/config/`
 ### UI & UX
 - **Tokyonight**: Beautiful and modern theme  
 - **lualine.nvim**: Fast statusline  
-- **bufferline.nvim**: Tabline with buffer indicators  
 - **nvim-navic**: Breadcrumbs from LSP symbols  
 - **nvim-colorizer.lua**: Highlights color codes  
 - **nvim-web-devicons**: File icons for Neovim
