@@ -7,23 +7,15 @@ return {
       "hrsh7th/cmp-nvim-lsp",
     },
     keys = {
-      { "<leader>lD", vim.diagnostic.setloclist,  desc = "Set Diagnostics to Location List" },
-      { "<leader>lq", vim.diagnostic.setqflist,   desc = "Set Diagnostics to Quickfix List" },
-      { "<leader>ln", vim.diagnostic.goto_next,   desc = "Go to Next Diagnostic" },
-      { "<leader>lp", vim.diagnostic.goto_prev,   desc = "Go to Previous Diagnostic" },
-      { "gd",         vim.lsp.buf.definition,     desc = "Go to Definition" },
-      { "gD",         vim.lsp.buf.declaration,    desc = "Go to Declaration" },
-      { "<leader>rn", vim.lsp.buf.rename,         desc = "Rename" },
-      { "<leader>ca", vim.lsp.buf.code_action,    desc = "Code Action" },
-      { "<C-k>",      vim.lsp.buf.signature_help, desc = "Signature Help" },
-      { "K",          vim.lsp.buf.hover,          desc = "Hover Info" },
-      { "<leader>dI", vim.diagnostic.open_float,  desc = "Open Diagnostic Float" },
-      { "<leader>fd", vim.lsp.buf.format,         desc = "Format Document" },
+      { "<leader>lD", vim.diagnostic.setloclist, desc = "Set Diagnostics to Location List" },
+      { "<leader>lq", vim.diagnostic.setqflist,  desc = "Set Diagnostics to Quickfix List" },
+      -- nvim lsp mapings
+      { "gd",         vim.lsp.buf.definition,    desc = "Go to Definition" },
+      { "gD",         vim.lsp.buf.declaration,   desc = "Go to Declaration" },
+      { "<leader>fd", vim.lsp.buf.format,        desc = "Format Document (Visual)" },
       {
         "<leader>vt",
         function()
-          -- Store the state globally or in a module-level variable
-          -- Avoid local scope so it persists across reloads
           if vim.g.virtual_text_enabled == nil then
             vim.g.virtual_text_enabled = true
           end
@@ -50,8 +42,25 @@ return {
         severity_sort = true,
         float = {
           border = "rounded",
-          source = "always",
+          source = true,
         },
+      })
+      vim.api.nvim_create_autocmd("LspAttach", {
+        callback = function(args)
+          local client = vim.lsp.get_client_by_id(args.data.client_id)
+          if not client then
+            return
+          end
+
+          if client and client.server_capabilities.documentFormattingProvider then
+            vim.api.nvim_create_autocmd("BufWritePre", {
+              buffer = args.buf,
+              callback = function()
+                vim.lsp.buf.format({ bufnr = args.buf, client_id = client.id })
+              end,
+            })
+          end
+        end,
       })
     end,
   },

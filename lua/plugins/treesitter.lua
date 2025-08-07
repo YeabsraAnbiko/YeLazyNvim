@@ -5,6 +5,17 @@ return {
     event = { "BufReadPost", "BufNewFile" },
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",
+      {
+        "folke/lazydev.nvim",
+        ft = "lua", -- only load on lua files
+        opts = {
+          library = {
+            -- See the configuration section for more details
+            -- Load luvit types when the `vim.uv` word is found
+            { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+          },
+        },
+      },
     },
     config = function()
       require("nvim-treesitter.configs").setup {
@@ -29,10 +40,79 @@ return {
             enable = true,
             lookahead = true,
             keymaps = {
+              -- Functions
               ["af"] = "@function.outer",
               ["if"] = "@function.inner",
+
+              -- Classes
               ["ac"] = "@class.outer",
               ["ic"] = "@class.inner",
+
+              -- Conditionals
+              ["ai"] = "@conditional.outer",
+              ["ii"] = "@conditional.inner",
+
+              -- Loops
+              ["al"] = "@loop.outer",
+              ["il"] = "@loop.inner",
+
+              -- Blocks
+              ["ab"] = "@block.outer",
+              ["ib"] = "@block.inner",
+
+              -- Statements (e.g., return, throw)
+              ["as"] = "@statement.outer",
+
+              -- Parameters
+              ["ap"] = "@parameter.outer",
+              ["ip"] = "@parameter.inner",
+
+              -- Calls (function calls)
+              ["aC"] = "@call.outer",
+              ["iC"] = "@call.inner",
+            },
+          },
+
+          move = {
+            enable = true,
+            set_jumps = true,
+
+            goto_next_start = {
+              ["]f"] = "@function.outer",
+              ["]c"] = "@class.outer",
+              ["]p"] = "@parameter.inner",
+              ["]l"] = "@loop.outer",
+              ["]i"] = "@conditional.outer",
+              ["]b"] = "@block.outer",
+            },
+
+            goto_previous_start = {
+              ["[f"] = "@function.outer",
+              ["[c"] = "@class.outer",
+              ["[p"] = "@parameter.inner",
+              ["[l"] = "@loop.outer",
+              ["[i"] = "@conditional.outer",
+              ["[b"] = "@block.outer",
+            },
+
+            goto_next_end = {
+              ["]F"] = "@function.outer",
+              ["]C"] = "@class.outer",
+            },
+
+            goto_previous_end = {
+              ["[F"] = "@function.outer",
+              ["[C"] = "@class.outer",
+            },
+          },
+
+          swap = {
+            enable = true,
+            swap_next = {
+              ["<leader>a"] = "@parameter.inner",
+            },
+            swap_previous = {
+              ["<leader>A"] = "@parameter.inner",
             },
           },
         },
