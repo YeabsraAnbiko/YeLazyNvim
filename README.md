@@ -55,7 +55,6 @@ Edit files inside `~/.config/nvim/lua/plugins/` and `~/.config/nvim/lua/config/`
 ### Navigation & Search
 - **telescope.nvim**: Finder over files, LSP, buffers  
 - **neo-tree.nvim**: Tree-based file explorer  
-- **vim-tmux-navigator**: Seamless window nav with tmux ( requires tmux, if you don't use tmux, you can remove this plugin)
 
 ### Git & Undo History
 - **Neogit**: Git interface inside Neovim 
