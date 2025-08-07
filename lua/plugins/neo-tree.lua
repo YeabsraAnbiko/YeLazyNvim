@@ -1,42 +1,34 @@
 return {
   {
-    "antosha417/nvim-lsp-file-operations",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-neo-tree/neo-tree.nvim",
-    },
-    config = function()
-      require("lsp-file-operations").setup()
-    end,
-    keys = {
-      { "<leader>e", "<cmd>Neotree toggle<cr>", desc = "Toggle NeoTree" },
-    },
-  },
-  {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
     dependencies = {
       "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons",
       "MunifTanjim/nui.nvim",
-      {
-        "s1n7ax/nvim-window-picker",
-        config = function()
-          require("window-picker").setup({
-            filter_rules = {
-              include_current_win = true,
-              autoselect_one = true,
-              bo = {
-                filetype = { "neo-tree", "neo-tree-popup", "notify" },
-                buftype = { "terminal", "quickfix" },
-              },
-            },
-          })
-        end,
-      },
+      "nvim-tree/nvim-web-devicons",
     },
-    event = "VeryLazy",
+  },
+  {
+    "antosha417/nvim-lsp-file-operations",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-neo-tree/neo-tree.nvim", -- makes sure that this loads after Neo-tree.
+    },
+    keys = {
+      { "<leader>e", "<cmd>Neotree toggle<cr>", desc = "Toggle NeoTree" },
+    },
     config = function()
+      require("window-picker").setup({
+        filter_rules = {
+          include_current_win = true,
+          autoselect_one = true,
+          bo = {
+            filetype = { "neo-tree", "neo-tree-popup", "notify" },
+            buftype = { "terminal", "quickfix" },
+          },
+        },
+      })
+      require("lsp-file-operations").setup()
       require("neo-tree").setup({
         close_if_last_window = false,
         popup_border_style = "rounded",
@@ -240,6 +232,25 @@ return {
               ["os"] = { "order_by_size", nowait = false },
               ["ot"] = { "order_by_type", nowait = false },
             },
+          },
+        },
+      })
+    end,
+  },
+  {
+    "s1n7ax/nvim-window-picker",
+    version = "2.*",
+    config = function()
+      require("window-picker").setup({
+        filter_rules = {
+          include_current_win = false,
+          autoselect_one = true,
+          -- filter using buffer options
+          bo = {
+            -- if the file type is one of following, the window will be ignored
+            filetype = { "neo-tree", "neo-tree-popup", "notify" },
+            -- if the buffer type is one of following, the window will be ignored
+            buftype = { "terminal", "quickfix" },
           },
         },
       })
