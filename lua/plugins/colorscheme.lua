@@ -8,7 +8,7 @@ return {
     lazy = false,
     priority = 1000,
     opts = {
-      style = "night",
+      style = "moon",
       transparent = false,
       terminal_colors = true,
       styles = {
@@ -27,22 +27,6 @@ return {
     config = function(_, opts)
       require("tokyonight").setup(opts)
       vim.cmd.colorscheme("tokyonight")
-
-      -- Customize split characters
-      vim.opt.fillchars = {
-        vert = "│", -- vertical split
-        horiz = "─", -- horizontal split
-        horizup = "┴",
-        horizdown = "┬",
-        vertleft = "┤",
-        vertright = "├",
-        verthoriz = "┼",
-      }
-
-      vim.cmd(" highlight WinSeparator guibg=NONE guifg=#7aa2f7 ")
-
-      -- Enable separate highlight for inactive windows (optional)
-      vim.opt.winhighlight = "WinSeparator:WinSeparator"
     end,
   },
 }

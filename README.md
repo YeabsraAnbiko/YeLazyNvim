@@ -40,18 +40,15 @@ Edit files inside `~/.config/nvim/lua/plugins/` and `~/.config/nvim/lua/config/`
 - **lazy.nvim**: Declarative and efficient plugin loader
 
 ### UI & UX
-- Tokyonight: Beautiful and modern theme  
+- **Tokyonight**: Beautiful and modern theme  
 - **lualine.nvim**: Fast statusline  
 - **bufferline.nvim**: Tabline with buffer indicators  
-- **noice.nvim**: Enhanced command line and LSP UIs  
 - **nvim-navic**: Breadcrumbs from LSP symbols  
 - **nvim-colorizer.lua**: Highlights color codes  
 - **nvim-web-devicons**: File icons for Neovim
 - **indent-blankline.nvim**: Indentation guides
 - **gitsigns.nvim**: Git diff signs in the gutter
 - **lspkind.nvim**: LSP icons for diagnostics and code actions
-- **noice.nvim**: Enhanced command line and LSP UIs
-- **nvim-notify**: Notification system for Neovim
 - **telescope-ui-select.nvim**: Telescope UI selector
 - **diffview.nvim**: Git diff viewer
 
@@ -61,7 +58,7 @@ Edit files inside `~/.config/nvim/lua/plugins/` and `~/.config/nvim/lua/config/`
 - **vim-tmux-navigator**: Seamless window nav with tmux ( requires tmux, if you don't use tmux, you can remove this plugin)
 
 ### Git & Undo History
-- **lazygit.nvim**: LazyGit UI inside Neovim
+- **Neogit**: Git interface inside Neovim 
 - **diffview.nvim**: Git diff viewer
 - **gitsigns.nvim**: Git diff signs in gutter  
 - **undotree**: Undo history visualization  

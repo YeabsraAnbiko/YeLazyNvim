@@ -38,6 +38,11 @@ return {
           path_display = { "filename_first" }
         },
         pickers = {
+          lsp_document_symbols = {
+            layout_config = {
+              prompt_position = "top",
+            },
+          },
           find_files = {
             hidden = true,
             layout_config = {
@@ -74,7 +79,7 @@ return {
             theme = "dropdown",
           },
           registers = {
-            theme = "dropdown",
+            theme = "ivy",
             layout_config = {
               prompt_position = "top",
             }
@@ -88,9 +93,18 @@ return {
             }
           },
           keymaps = {
+            theme = "ivy",
+          },
+          treesitter = {
             layout_config = {
               prompt_position = "top",
             }
+          },
+          vim_options = {
+            theme = "ivy",
+          },
+          commands = {
+            theme = "ivy",
           },
         },
         extensions = {
