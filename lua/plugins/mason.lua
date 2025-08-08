@@ -49,7 +49,6 @@ return {
             callback = vim.lsp.buf.clear_references,
           })
         end
-
       end
 
       local handlers = {
@@ -132,7 +131,7 @@ return {
         ensure_installed = {
           "lua_ls", "clangd", "bashls", "cssls", "tailwindcss",
           "html", "ts_ls", "jsonls", "marksman", "pyright",
-          "sqlls", "vimls", "emmet_ls",
+          "sqlls", "vimls", "emmet_ls", "eslint",
         },
         handlers = handlers,
       }
