@@ -35,9 +35,78 @@ return {
               ["q"] = actions.close,
             }
           },
-          path_display = {"filename_first"}
+          path_display = { "filename_first" }
         },
-        pickers = {},
+        pickers = {
+          lsp_document_symbols = {
+            layout_config = {
+              prompt_position = "top",
+            },
+          },
+          find_files = {
+            hidden = true,
+            layout_config = {
+              prompt_position = "top",
+            }
+          },
+          live_grep = {
+            layout_config = {
+              prompt_position = "top",
+            }
+          },
+          current_buffer_fuzzy_find = {
+            layout_config = {
+              prompt_position = "top",
+            }
+          },
+          oldfiles = {
+            layout_config = {
+              prompt_position = "top",
+            }
+          },
+          buffers = {
+            sort_lastused = true,
+            layout_config = {
+              prompt_position = "top",
+            }
+          },
+          man_pages = {
+            layout_config = {
+              prompt_position = "top",
+            }
+          },
+          colorscheme = {
+            theme = "dropdown",
+          },
+          registers = {
+            theme = "ivy",
+            layout_config = {
+              prompt_position = "top",
+            }
+          },
+          spell_suggest = {
+            theme = "cursor",
+          },
+          help_tags = {
+            layout_config = {
+              prompt_position = "top",
+            }
+          },
+          keymaps = {
+            theme = "ivy",
+          },
+          treesitter = {
+            layout_config = {
+              prompt_position = "top",
+            }
+          },
+          vim_options = {
+            theme = "ivy",
+          },
+          commands = {
+            theme = "ivy",
+          },
+        },
         extensions = {
           ["ui-select"] = {
             require("telescope.themes").get_dropdown({
@@ -53,95 +122,31 @@ return {
           },
         },
       })
-
       require('telescope').load_extension('fzf')
       require('telescope').load_extension('ui-select')
-
-      local builtin = require('telescope.builtin')
-
-      -- File Search
-      vim.keymap.set('n', '<leader>ff', function() builtin.find_files({
-        hidden = true,
-        layout_config = {
-          prompt_position = "top",
-        }
-      }) end, { desc = 'Find Files' })
-      vim.keymap.set('n', '<leader>fh', builtin.oldfiles, { desc = 'Recent Files' })
-      vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Buffers' })
-      vim.keymap.set('n', '<leader>fg',function () builtin.live_grep({
-        layout_config = {
-          prompt_position = "top",
-        }
-
-      }) end, { desc = 'Live Grep' })
-      vim.keymap.set('n', '<leader>ll',function() builtin.current_buffer_fuzzy_find({
-        layout_config = {
-          prompt_position = "top",
-        }
-
-      }) end, { desc = 'Fuzzy Current Buffer' })
-      vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = 'Resume Last Search' })
-
-      -- Git
-      vim.keymap.set('n', '<leader>Gf', function() builtin.git_files({
-        layout_config = {
-          prompt_position = "top",
-        }
-
-
-      }) end, { desc = 'Git Files' })
-      vim.keymap.set('n', '<leader>Gl', function() builtin.git_commits({
-        layout_config = {
-          prompt_position = "top",
-        }
-
-      }) end, { desc = 'Git Commits' })
-      vim.keymap.set('n', '<leader>Gd', function() builtin.git_bcommits({
-        layout_config = {
-          prompt_position = "top",
-        }
-
-      }) end, { desc = 'Git Buffer Commits' })
-      vim.keymap.set('n', '<leader>Gs', function() builtin.git_status({
-        layout_config = {
-          prompt_position = "top",
-        }
-
-      }) end, { desc = 'Git Status' })
-      vim.keymap.set('n', '<leader>Gb', function() builtin.git_branches({
-        layout_config = {
-          prompt_position = "top",
-        }
-
-      }) end, { desc = 'Git Branches' })
-
-      -- LSP 
-      vim.keymap.set('n', '<leader>sd', function()
-        builtin.lsp_definitions({
-          jump_type =  {"split",}
-        })
-      end, { desc = 'LSP Definitions' })
-      vim.keymap.set('n', '<leader>ss', builtin.lsp_document_symbols, { desc = 'Document Symbols' })
-
-      -- Others
-      vim.keymap.set('n', '<leader>cs', builtin.colorscheme, { desc = 'Colorscheme' })
-      vim.keymap.set('n', '<leader>rg', builtin.registers, { desc = 'Registers' })
-      vim.keymap.set('n', '<leader>tr', builtin.treesitter, { desc = 'Treesitter' })
-      vim.keymap.set('n', '<leader>sp', builtin.spell_suggest, { desc = 'Spell Suggest' })
-      vim.keymap.set('n', '<leader>vo', builtin.vim_options, { desc = 'Vim Options' })
-      vim.keymap.set('n', '<leader>cm', builtin.commands, { desc = 'Commands' })
-      vim.keymap.set('n', '<leader>sh',function() builtin.help_tags({
-        layout_config = {
-          prompt_position = "top",
-        }
-      }) end, { desc = 'Help Tags' })
-      vim.keymap.set('n', '<leader>sm',function() builtin.man_pages({
-        layout_config = {
-          prompt_position = "top",
-        }
-      }) end, { desc = 'Man Pages' })
-      vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = 'Search Keymaps' })
-    end
+    end,
+    keys = {
+      { "<leader>ff", require('telescope.builtin').find_files,                desc = 'Find Files' },
+      { "<leader>fh", require('telescope.builtin').oldfiles,                  desc = 'Recent Files' },
+      { "<leader>fb", require('telescope.builtin').buffers,                   desc = 'Buffers' },
+      { "<leader>fg", require('telescope.builtin').live_grep,                 desc = 'Live Grep' },
+      { "<leader>ll", require('telescope.builtin').current_buffer_fuzzy_find, desc = 'Fuzzy Current Buffer' },
+      { "<leader>fr", require('telescope.builtin').resume,                    desc = 'Resume Last Search' },
+      { "<leader>ss", require('telescope.builtin').lsp_document_symbols,      desc = 'Document Symbols' },
+      { "<leader>sp", require('telescope.builtin').spell_suggest,             desc = 'Spell Suggest' },
+      { "<leader>cs", require('telescope.builtin').colorscheme,               desc = 'Colorscheme' },
+      { "<leader>rg", require('telescope.builtin').registers,                 desc = 'Registers' },
+      { "<leader>tr", require('telescope.builtin').treesitter,                desc = 'Treesitter' },
+      { "<leader>sp", require('telescope.builtin').spell_suggest,             desc = 'Spell Suggest' },
+      { "<leader>vo", require('telescope.builtin').vim_options,               desc = 'Vim Options' },
+      { "<leader>cm", require('telescope.builtin').commands,                  desc = 'Commands' },
+      { "<leader>sk", require('telescope.builtin').keymaps,                   desc = 'Search Keymaps' },
+      { "<leader>sh", require('telescope.builtin').help_tags,                 desc = 'Help Tags' },
+      { "<leader>sm", require('telescope.builtin').man_pages,                 desc = 'Man Pages' },
+      { "<leader>gs", require('telescope.builtin').grep_string,               desc = 'Search Under Cursor or Selection' },
+      { '<leader>Gf', require('telescope.builtin').git_files,                 desc = 'Git Files' },
+      { '<leader>ta', require('telescope.builtin').tags,                      desc = 'List Tags' },
+    },
   },
   {
     'nvim-telescope/telescope-fzf-native.nvim',
@@ -152,4 +157,3 @@ return {
     'nvim-telescope/telescope-ui-select.nvim'
   }
 }
-

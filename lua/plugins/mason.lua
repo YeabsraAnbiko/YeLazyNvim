@@ -49,7 +49,6 @@ return {
             callback = vim.lsp.buf.clear_references,
           })
         end
-
       end
 
       local handlers = {
