@@ -12,6 +12,7 @@ return {
           javascriptreact = { "prettierd" },
           typescriptreact = { "prettierd" },
           lua = { "stylua" },
+          json = { "prettierd" },
         },
         format_on_save = {
           lsp_fallback = true,
