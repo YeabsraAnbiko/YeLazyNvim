@@ -8,11 +8,11 @@ return {
     },
     keys = {
       { "<leader>lD", vim.diagnostic.setloclist, desc = "Set Diagnostics to Location List" },
-      { "<leader>lq", vim.diagnostic.setqflist,  desc = "Set Diagnostics to Quickfix List" },
+      { "<leader>lq", vim.diagnostic.setqflist, desc = "Set Diagnostics to Quickfix List" },
       -- nvim lsp mapings
-      { "gd",         vim.lsp.buf.definition,    desc = "Go to Definition" },
-      { "gD",         vim.lsp.buf.declaration,   desc = "Go to Declaration" },
-      { "<leader>fd", vim.lsp.buf.format,        desc = "Format Document (Visual)" },
+      { "gd", vim.lsp.buf.definition, desc = "Go to Definition" },
+      { "gD", vim.lsp.buf.declaration, desc = "Go to Declaration" },
+      { "<leader>fd", vim.lsp.buf.format, desc = "Format Document (Visual)" },
       {
         "<leader>vt",
         function()
@@ -23,12 +23,12 @@ return {
           vim.g.virtual_text_enabled = not vim.g.virtual_text_enabled
 
           vim.diagnostic.config({
-            virtual_text = vim.g.virtual_text_enabled
+            virtual_text = vim.g.virtual_text_enabled,
           })
 
           print("Diagnostics virtual text " .. (vim.g.virtual_text_enabled and "enabled" or "disabled"))
         end,
-        desc = "Toggle Diagnostics Virtual Text"
+        desc = "Toggle Diagnostics Virtual Text",
       },
     },
 
@@ -41,7 +41,6 @@ return {
         update_in_insert = true,
         severity_sort = true,
         float = {
-          border = "rounded",
           source = true,
         },
       })
