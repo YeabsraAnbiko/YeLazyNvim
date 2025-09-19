@@ -13,12 +13,13 @@ return {
           typescriptreact = { "prettierd" },
           lua = { "stylua" },
           json = { "prettierd" },
+          html = { "prettierd" },
         },
         format_on_save = {
           lsp_fallback = true,
           async = false,
-        }
+        },
       })
     end,
-  }
+  },
 }
