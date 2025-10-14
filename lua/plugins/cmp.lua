@@ -9,6 +9,7 @@ return {
       "hrsh7th/cmp-buffer",
       "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip",
+      "hrsh7th/cmp-cmdline",
     },
     config = function()
       local lspkind = require("lspkind")
@@ -64,7 +65,7 @@ return {
           documentation = cmp.config.window.bordered(),
         },
         mapping = cmp.mapping.preset.insert({
-          ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+          ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
           ["<C-Space>"] = cmp.mapping.complete(),
           ["<CR>"] = cmp.mapping.confirm({ select = true }),
@@ -72,15 +73,28 @@ return {
         completion = {
           completeopt = "menu,menuone,noselect",
         },
-        experimental = {
-          ghost_text = true,
-        },
         sources = cmp.config.sources({
           { name = "nvim_lsp", group_index = 1 },
           { name = "luasnip", group_index = 5 },
           { name = "path", group_index = 4 },
           { name = "buffer", group_index = 3 },
           { name = "copilot", group_index = 2 },
+        }),
+      })
+
+      cmp.setup.cmdline({ "/", "?" }, {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+          { name = "buffer" },
+        },
+      })
+
+      cmp.setup.cmdline(":", {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          { name = "path" },
+        }, {
+          { name = "cmdline" },
         }),
       })
     end,
