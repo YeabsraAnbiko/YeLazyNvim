@@ -101,11 +101,13 @@ return {
   },
   {
     "L3MON4D3/LuaSnip",
+    dependencies = {
+      "rafamadriz/friendly-snippets",
+    },
     lazy = false,
-    build = "make install_jsregexp", -- optional but recommended
+    build = "make install_jsregexp",
     config = function()
-      local luasnip = require("luasnip")
-      require("luasnip.snippets")(luasnip)
+      require("luasnip.loaders.from_vscode").lazy_load()
     end,
   },
 }
