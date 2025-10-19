@@ -5,7 +5,7 @@ return {
       "rcarriga/nvim-dap-ui",
       "nvim-neotest/nvim-nio",
       "theHamsta/nvim-dap-virtual-text",
-      "williamboman/mason.nvim",
+      "mason-org/mason.nvim",
       "jay-babu/mason-nvim-dap.nvim",
     },
     config = function()
@@ -40,12 +40,12 @@ return {
     end,
     keys = {
       { "<leader>db", "<cmd>DapToggleBreakpoint<cr>", desc = "Toggle Breakpoint" },
-      { "<leader>dc", "<cmd>DapContinue<cr>",         desc = "Continue" },
-      { "<leader>di", "<cmd>DapStepInto<cr>",         desc = "Step Into" },
-      { "<leader>do", "<cmd>DapStepOver<cr>",         desc = "Step Over" },
-      { "<leader>du", "<cmd>DapStepOut<cr>",          desc = "Step Out" },
-      { "<leader>dr", "<cmd>DapReplOpen<cr>",         desc = "Open REPL" },
-      { "<leader>dt", "<cmd>DapTerminate<cr>",        desc = "Terminate Debugger" },
+      { "<leader>dc", "<cmd>DapContinue<cr>", desc = "Continue" },
+      { "<leader>di", "<cmd>DapStepInto<cr>", desc = "Step Into" },
+      { "<leader>do", "<cmd>DapStepOver<cr>", desc = "Step Over" },
+      { "<leader>du", "<cmd>DapStepOut<cr>", desc = "Step Out" },
+      { "<leader>dr", "<cmd>DapReplOpen<cr>", desc = "Open REPL" },
+      { "<leader>dt", "<cmd>DapTerminate<cr>", desc = "Terminate Debugger" },
     },
   },
 }
