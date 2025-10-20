@@ -7,29 +7,14 @@ return {
       "MunifTanjim/nui.nvim",
       "nvim-tree/nvim-web-devicons",
     },
-  },
-  {
-    "antosha417/nvim-lsp-file-operations",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-neo-tree/neo-tree.nvim", -- makes sure that this loads after Neo-tree.
-    },
+    lazy = false,
     keys = {
       { "<leader>e", "<cmd>Neotree toggle<cr>", desc = "Toggle NeoTree" },
+      { "<leader>ns", "<cmd>Neotree document_symbols right<cr>", desc = "Toggle NeoTree" },
     },
     config = function()
-      require("window-picker").setup({
-        filter_rules = {
-          include_current_win = true,
-          autoselect_one = true,
-          bo = {
-            filetype = { "neo-tree", "neo-tree-popup", "notify" },
-            buftype = { "terminal", "quickfix" },
-          },
-        },
-      })
-      require("lsp-file-operations").setup()
       require("neo-tree").setup({
+        sources = { "document_symbols", "git_status", "buffers", "filesystem" },
         close_if_last_window = false,
         popup_border_style = "rounded",
         enable_git_status = true,
@@ -37,7 +22,6 @@ return {
         open_files_do_not_replace_types = { "terminal", "trouble", "qf" },
         open_files_using_relative_paths = false,
         sort_case_insensitive = false,
-        sort_function = nil,
         default_component_configs = {
           container = { enable_character_fade = true },
           indent = {
@@ -55,18 +39,6 @@ return {
             folder_closed = "",
             folder_open = "",
             folder_empty = "󰜌",
-            folder_empty_open = "󰜌",
-            provider = function(icon, node, state)
-              if node.type == "file" or node.type == "terminal" then
-                local success, web_devicons = pcall(require, "nvim-web-devicons")
-                local name = node.type == "terminal" and "terminal" or node.name
-                if success then
-                  local devicon, hl = web_devicons.get_icon(name)
-                  icon.text = devicon or icon.text
-                  icon.highlight = hl or icon.highlight
-                end
-              end
-            end,
             default = "*",
             highlight = "NeoTreeFileIcon",
           },
@@ -92,11 +64,29 @@ return {
               conflict = "",
             },
           },
-          file_size = { enabled = false },
-          type = { enabled = false },
-          created = { enabled = false },
-          last_modified = { enabled = false },
-          symlink_target = { enabled = false },
+          file_size = {
+            enabled = true,
+            width = 12,
+            required_width = 64,
+          },
+          type = {
+            enabled = true,
+            width = 10,
+            required_width = 122,
+          },
+          last_modified = {
+            enabled = true,
+            width = 20,
+            required_width = 88,
+          },
+          created = {
+            enabled = true,
+            width = 20,
+            required_width = 110,
+          },
+          symlink_target = {
+            enabled = false,
+          },
         },
         commands = {},
         window = {
@@ -107,8 +97,8 @@ return {
             nowait = true,
           },
           mappings = {
-            ["<C-space>"] = { "toggle_node", nowait = false },
-            ["<2-LeftMouse>"] = "open",
+            ["<c-space>"] = { "toggle_node", nowait = false },
+            ["<2-leftmouse>"] = "open",
             ["<cr>"] = "open",
             ["<esc>"] = "cancel",
             ["P"] = { "toggle_preview", config = { use_float = true, use_image_nvim = true } },
@@ -139,12 +129,12 @@ return {
         },
         nesting_rules = {},
         filesystem = {
-          position = "left",
           filtered_items = {
             visible = false,
             hide_dotfiles = true,
             hide_gitignored = true,
             hide_hidden = true,
+            hide_ignored = true,
             hide_by_pattern = {
               "*.meta",
               "*/src/*/tsconfig.json",
@@ -155,7 +145,7 @@ return {
             leave_dirs_open = false,
           },
           group_empty_dirs = false,
-          hijack_netrw_behavior = "open_default",
+          hijack_netrw_behavior = "open_current",
           use_libuv_file_watcher = true,
           window = {
             mappings = {
@@ -167,11 +157,12 @@ return {
               ["f"] = "fuzzy_finder",
               ["F"] = "fuzzy_finder_directory",
               ["#"] = "fuzzy_sorter",
+              ["*"] = "fuzzy_sorter_directory",
               ["/"] = "filter_on_submit",
               ["<c-x>"] = "clear_filter",
               ["[g"] = "prev_git_modified",
               ["]g"] = "next_git_modified",
-              ["o"] = { "show_help", nowait = false, config = { title = "Order by", prefix_key = "o" } },
+              ["o"] = { "show_help", nowait = false, config = { title = "order by", prefix_key = "o" } },
               ["oc"] = { "order_by_created", nowait = false },
               ["od"] = { "order_by_diagnostics", nowait = false },
               ["og"] = { "order_by_git_status", nowait = false },
@@ -186,6 +177,18 @@ return {
               ["<up>"] = "move_cursor_up",
               ["<C-p>"] = "move_cursor_up",
               ["<esc>"] = "close",
+              ["<S-CR>"] = "close_keep_filter",
+              ["<C-CR>"] = "close_clear_filter",
+              ["<C-w>"] = { "<C-S-w>", raw = true },
+              {
+                n = {
+                  ["j"] = "move_cursor_down",
+                  ["k"] = "move_cursor_up",
+                  ["<S-CR>"] = "close_keep_filter",
+                  ["<C-CR>"] = "close_clear_filter",
+                  ["<esc>"] = "close",
+                },
+              },
             },
           },
         },
@@ -198,13 +201,13 @@ return {
           show_unloaded = true,
           window = {
             mappings = {
-              ["D"] = "buffer_delete",
+              ["d"] = "buffer_delete",
               ["bd"] = "buffer_delete",
               ["<bs>"] = "navigate_up",
               ["u"] = "navigate_up",
               ["-"] = "navigate_up",
               ["."] = "set_root",
-              ["o"] = { "show_help", nowait = false, config = { title = "Order by", prefix_key = "o" } },
+              ["o"] = { "show_help", nowait = false, config = { title = "order by", prefix_key = "o" } },
               ["oc"] = { "order_by_created", nowait = false },
               ["od"] = { "order_by_diagnostics", nowait = false },
               ["om"] = { "order_by_modified", nowait = false },
@@ -216,16 +219,15 @@ return {
         },
         git_status = {
           window = {
-            position = "left",
             mappings = {
-              ["A"] = "git_add_all",
+              ["a"] = "git_add_all",
               ["gu"] = "git_unstage_file",
               ["ga"] = "git_add_file",
               ["gr"] = "git_revert_file",
               ["gc"] = "git_commit",
               ["gp"] = "git_push",
               ["gg"] = "git_commit_and_push",
-              ["o"] = { "show_help", nowait = false, config = { title = "Order by", prefix_key = "o" } },
+              ["o"] = { "show_help", nowait = false, config = { title = "order by", prefix_key = "o" } },
               ["oc"] = { "order_by_created", nowait = false },
               ["od"] = { "order_by_diagnostics", nowait = false },
               ["om"] = { "order_by_modified", nowait = false },
@@ -235,22 +237,34 @@ return {
             },
           },
         },
+        document_symbols = {
+          follow_cursor = true,
+        },
       })
     end,
   },
   {
+    "antosha417/nvim-lsp-file-operations",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-neo-tree/neo-tree.nvim",
+    },
+    config = function()
+      require("lsp-file-operations").setup()
+    end,
+  },
+  {
     "s1n7ax/nvim-window-picker",
+    event = "VeryLazy",
     version = "2.*",
     config = function()
       require("window-picker").setup({
+        hint = "floating-big-letter",
         filter_rules = {
           include_current_win = false,
           autoselect_one = true,
-          -- filter using buffer options
           bo = {
-            -- if the file type is one of following, the window will be ignored
             filetype = { "neo-tree", "neo-tree-popup", "notify" },
-            -- if the buffer type is one of following, the window will be ignored
             buftype = { "terminal", "quickfix" },
           },
         },
