@@ -36,10 +36,12 @@ return {
             expander_highlight = "NeoTreeExpander",
           },
           icon = {
+            folder_empty_open = "",
+            use_filtered_colors = true,
             folder_closed = "",
             folder_open = "",
-            folder_empty = "󰜌",
-            default = "*",
+            folder_empty = "",
+            default = "", --
             highlight = "NeoTreeFileIcon",
           },
           modified = {
@@ -75,11 +77,13 @@ return {
             required_width = 122,
           },
           last_modified = {
+            format = "%Y-%m-%d %H:%M",
             enabled = true,
             width = 20,
             required_width = 88,
           },
           created = {
+            format = "%Y-%m-%d %H:%M",
             enabled = true,
             width = 20,
             required_width = 110,
