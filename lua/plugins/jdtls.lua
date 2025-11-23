@@ -38,7 +38,20 @@ return {
 
       -- Workspace per project
       local home = os.getenv("HOME") or os.getenv("USERPROFILE")
-      local workspace_dir = home .. "/.local/share/eclipse/" .. vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
+      local root_dir = require("jdtls.setup").find_root({
+        ".git",
+        "mvnw",
+        "gradlew",
+        "pom.xml",
+        "build.gradle",
+      })
+
+      local workspace_dir
+      if root_dir and root_dir ~= "" then
+        workspace_dir = home .. "/.local/share/eclipse/" .. vim.fn.fnamemodify(root_dir, ":t")
+      else
+        workspace_dir = home .. "/.local/share/eclipse/" .. vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
+      end
 
       -- Find the actual launcher JAR dynamically
       local launcher_jar = vim.fn.glob(mason_path .. "/plugins/org.eclipse.equinox.launcher_*.jar", true)
@@ -70,13 +83,7 @@ return {
           "-data",
           workspace_dir,
         },
-        root_dir = require("jdtls.setup").find_root({
-          ".git",
-          "mvnw",
-          "gradlew",
-          "pom.xml",
-          "build.gradle",
-        }),
+        root_dir = root_dir,
         settings = {
           java = {
             eclipse = { downloadSources = true },
