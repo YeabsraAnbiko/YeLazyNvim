@@ -40,10 +40,15 @@ return {
       local home = os.getenv("HOME") or os.getenv("USERPROFILE")
       local root_dir = require("jdtls.setup").find_root({
         ".git",
+        ".project",
+        ".classpath",
         "mvnw",
         "gradlew",
         "pom.xml",
+        "settings.gradle",
+        "settings.gradle.kts",
         "build.gradle",
+        "build.gradle.kts",
       })
 
       local workspace_dir

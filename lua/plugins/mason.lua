@@ -23,7 +23,10 @@ return {
       { "mason-org/mason.nvim" },
       "neovim/nvim-lspconfig",
     },
-    opts = function()
+    config = function()
+      require("mason-lspconfig").setup({
+        automatic_enable = false,
+      })
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
       capabilities.textDocument.completion.completionItem.snippetSupport = true
 
@@ -53,6 +56,9 @@ return {
 
       local handlers = {
         function(server_name)
+          if server_name == "jdtls" then
+            return
+          end
           lspconfig[server_name].setup({
             capabilities = capabilities,
             on_attach = on_attach,
@@ -61,6 +67,7 @@ return {
             },
           })
         end,
+        ["jdtls"] = function() end,
 
         ["tailwindcss"] = function()
           lspconfig.tailwindcss.setup({
