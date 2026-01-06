@@ -2,18 +2,25 @@ return {
   {
     "NeogitOrg/neogit",
     dependencies = {
-      "nvim-lua/plenary.nvim",  -- required
+      "nvim-lua/plenary.nvim", -- required
       "sindrets/diffview.nvim", -- optional but recommended
       "nvim-telescope/telescope.nvim",
     },
     cmd = "Neogit",
     keys = {
-      { "<leader>gg", function() require("neogit").open() end, desc = "Open Neogit" },
+      {
+        "<leader>gg",
+        function()
+          require("neogit").open()
+        end,
+        desc = "Open Neogit",
+      },
     },
     config = function()
       require("neogit").setup({
         integrations = {
           diffview = true, -- enables diffview integration
+          telescope = true,
         },
         signs = {
           section = { "▸", "▾" },
@@ -33,7 +40,7 @@ return {
       local gs = require("gitsigns")
 
       gs.setup({
-        signs                   = {
+        signs = {
           add = { text = "▎" },
           change = { text = "▎" },
           delete = { text = "▎" },
@@ -41,14 +48,14 @@ return {
           changedelete = { text = "~" },
           untracked = { text = "┆" },
         },
-        signcolumn              = true,  -- Toggle with `:Gitsigns toggle_signs`
-        numhl                   = false, -- Toggle with `:Gitsigns toggle_numhl`
-        linehl                  = false, -- Toggle with `:Gitsigns toggle_linehl`
-        word_diff               = false, -- Toggle with `:Gitsigns toggle_word_diff`
-        current_line_blame      = true,
+        signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
+        numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
+        linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
+        word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
+        current_line_blame = true,
         current_line_blame_opts = {
           virt_text = true,
-          virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
+          virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
           delay = 100,
           ignore_whitespace = false,
         },
@@ -58,7 +65,9 @@ return {
       {
         "]c",
         function()
-          if vim.wo.diff then return "]c" end
+          if vim.wo.diff then
+            return "]c"
+          end
           vim.schedule(require("gitsigns").next_hunk)
           return "<Ignore>"
         end,
@@ -68,7 +77,9 @@ return {
       {
         "[c",
         function()
-          if vim.wo.diff then return "[c" end
+          if vim.wo.diff then
+            return "[c"
+          end
           vim.schedule(require("gitsigns").prev_hunk)
           return "<Ignore>"
         end,
@@ -77,32 +88,98 @@ return {
       },
 
       -- Actions (normal mode)
-      { "<leader>hs", function() require("gitsigns").stage_hunk() end,      desc = "Stage hunk" },
-      { "<leader>hr", function() require("gitsigns").reset_hunk() end,      desc = "Reset hunk" },
-      { "<leader>hS", function() require("gitsigns").stage_buffer() end,    desc = "Stage buffer" },
-      { "<leader>hu", function() require("gitsigns").undo_stage_hunk() end, desc = "Undo stage hunk" },
-      { "<leader>hR", function() require("gitsigns").reset_buffer() end,    desc = "Reset buffer" },
-      { "<leader>hp", function() require("gitsigns").preview_hunk() end,    desc = "Preview hunk" },
+      {
+        "<leader>hs",
+        function()
+          require("gitsigns").stage_hunk()
+        end,
+        desc = "Stage hunk",
+      },
+      {
+        "<leader>hr",
+        function()
+          require("gitsigns").reset_hunk()
+        end,
+        desc = "Reset hunk",
+      },
+      {
+        "<leader>hS",
+        function()
+          require("gitsigns").stage_buffer()
+        end,
+        desc = "Stage buffer",
+      },
+      {
+        "<leader>hu",
+        function()
+          require("gitsigns").undo_stage_hunk()
+        end,
+        desc = "Undo stage hunk",
+      },
+      {
+        "<leader>hR",
+        function()
+          require("gitsigns").reset_buffer()
+        end,
+        desc = "Reset buffer",
+      },
+      {
+        "<leader>hp",
+        function()
+          require("gitsigns").preview_hunk()
+        end,
+        desc = "Preview hunk",
+      },
       {
         "<leader>hb",
-        function() require("gitsigns").blame_line { full = true } end,
+        function()
+          require("gitsigns").blame_line({ full = true })
+        end,
         desc = "Blame line (full)",
       },
-      { "<leader>tb", function() require("gitsigns").toggle_current_line_blame() end, desc = "Toggle current line blame" },
-      { "<leader>hd", function() require("gitsigns").diffthis() end,                  desc = "Git diff" },
-      { "<leader>hD", function() require("gitsigns").diffthis("~") end,               desc = "Git diff ~" },
-      { "<leader>td", function() require("gitsigns").toggle_deleted() end,            desc = "Toggle deleted lines" },
+      {
+        "<leader>tb",
+        function()
+          require("gitsigns").toggle_current_line_blame()
+        end,
+        desc = "Toggle current line blame",
+      },
+      {
+        "<leader>hd",
+        function()
+          require("gitsigns").diffthis()
+        end,
+        desc = "Git diff",
+      },
+      {
+        "<leader>hD",
+        function()
+          require("gitsigns").diffthis("~")
+        end,
+        desc = "Git diff ~",
+      },
+      {
+        "<leader>td",
+        function()
+          require("gitsigns").toggle_deleted()
+        end,
+        desc = "Toggle deleted lines",
+      },
 
       -- Actions (visual mode)
       {
         "<leader>hs",
-        function() require("gitsigns").stage_hunk { vim.fn.line("."), vim.fn.line("v") } end,
+        function()
+          require("gitsigns").stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+        end,
         mode = "v",
         desc = "Stage hunk (visual)",
       },
       {
         "<leader>hr",
-        function() require("gitsigns").reset_hunk { vim.fn.line("."), vim.fn.line("v") } end,
+        function()
+          require("gitsigns").reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+        end,
         mode = "v",
         desc = "Reset hunk (visual)",
       },
@@ -110,7 +187,7 @@ return {
   },
 
   {
-    'mbbill/undotree',
+    "mbbill/undotree",
     config = function()
       local home = os.getenv("HOME") or os.getenv("USERPROFILE") -- Windows fallback
       vim.opt.undodir = home .. "/.nvim/undodir"

@@ -1,7 +1,7 @@
 return {
   -- Mason core
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     cmd = "Mason",
     opts = {
       ui = {
@@ -17,10 +17,10 @@ return {
 
   -- Mason LSPconfig integration
   {
-    "williamboman/mason-lspconfig.nvim",
+    "mason-org/mason-lspconfig.nvim",
     lazy = false,
     dependencies = {
-      { "williamboman/mason.nvim" },
+      { "mason-org/mason.nvim" },
       "neovim/nvim-lspconfig",
     },
     opts = function()
@@ -71,21 +71,31 @@ return {
               tailwindCSS = {
                 experimental = {
                   classRegex = {
-                    { "class\\s*=\\s*\"([^\"]*)\"",     1 },
-                    { "className\\s*=\\s*\"([^\"]*)\"", 1 },
-                    { "tw\\`([^`]*)\\`",                1 },
-                    { "cn\\(([^)]*)\\)",                1 },
+                    { 'class\\s*=\\s*"([^"]*)"', 1 },
+                    { 'className\\s*=\\s*"([^"]*)"', 1 },
+                    { "tw\\`([^`]*)\\`", 1 },
+                    { "cn\\(([^)]*)\\)", 1 },
                   },
                 },
               },
             },
             filetypes = {
-              "html", "javascript", "typescript", "javascriptreact",
-              "typescriptreact", "svelte", "vue", "php", "blade",
+              "html",
+              "javascript",
+              "typescript",
+              "javascriptreact",
+              "typescriptreact",
+              "svelte",
+              "vue",
+              "php",
+              "blade",
             },
             root_dir = lspconfig.util.root_pattern(
-              "tailwind.config.js", "tailwind.config.ts", "postcss.config.js",
-              "package.json", ".git"
+              "tailwind.config.js",
+              "tailwind.config.ts",
+              "postcss.config.js",
+              "package.json",
+              ".git"
             ),
           })
         end,
@@ -95,7 +105,14 @@ return {
             capabilities = capabilities,
             on_attach = on_attach,
             filetypes = {
-              "html", "css", "scss", "javascriptreact", "typescriptreact", "vue", "svelte", "xml"
+              "html",
+              "css",
+              "scss",
+              "javascriptreact",
+              "typescriptreact",
+              "vue",
+              "svelte",
+              "xml",
             },
             init_options = {
               html = {
@@ -109,11 +126,7 @@ return {
       }
 
       return {
-        ensure_installed = {
-          "bashls", "cssls", "tailwindcss",
-          "html", "ts_ls", "jsonls", "pyright",
-          "vimls", "emmet_ls",
-        },
+        ensure_installed = {},
         handlers = handlers,
       }
     end,
