@@ -9,7 +9,7 @@ return {
     },
     lazy = false,
     keys = {
-      { "<leader>e", "<cmd>Neotree toggle<cr>", desc = "Toggle NeoTree" },
+      { "<leader>e",  "<cmd>Neotree focus<cr>",                  desc = "Toggle NeoTree" },
       { "<leader>ns", "<cmd>Neotree document_symbols right<cr>", desc = "Document Symbols" },
     },
     config = function()
