@@ -9,8 +9,9 @@ return {
     },
     lazy = false,
     keys = {
-      { "<leader>e", "<cmd>Neotree toggle<cr>", desc = "Toggle NeoTree" },
+      { "<leader>e", "<cmd>Neotree toggle right<cr>", desc = "Toggle NeoTree" },
       { "<leader>ns", "<cmd>Neotree document_symbols right<cr>", desc = "Document Symbols" },
+      { "<leader>fs", "<cmd>Neotree filesystem float<cr>", desc = "Floating Filesystem Tree" },
     },
     config = function()
       require("neo-tree").setup({
