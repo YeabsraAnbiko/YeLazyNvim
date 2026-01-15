@@ -14,6 +14,8 @@ return {
           lua = { "stylua" },
           json = { "prettierd" },
           html = { "prettierd" },
+          java = { "google_java_format" },
+          sql = { "sql_formatter" },
         },
         format_on_save = {
           lsp_fallback = true,

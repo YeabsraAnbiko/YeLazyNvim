@@ -9,5 +9,8 @@ return {
     preset = "obsidian",
     file_types = { "markdown" },
     nested = false,
+    heading = {
+      width = "block",
+    },
   },
 }
