@@ -13,29 +13,11 @@ return {
       { "gd", vim.lsp.buf.definition, desc = "Go to Definition" },
       { "gD", vim.lsp.buf.declaration, desc = "Go to Declaration" },
       { "<leader>fd", vim.lsp.buf.format, desc = "Format Document (Visual)" },
-      {
-        "<leader>vt",
-        function()
-          if vim.g.virtual_text_enabled == nil then
-            vim.g.virtual_text_enabled = true
-          end
-
-          vim.g.virtual_text_enabled = not vim.g.virtual_text_enabled
-
-          vim.diagnostic.config({
-            virtual_text = vim.g.virtual_text_enabled,
-          })
-
-          print("Diagnostics virtual text " .. (vim.g.virtual_text_enabled and "enabled" or "disabled"))
-        end,
-        desc = "Toggle Diagnostics Virtual Text",
-      },
     },
 
     config = function()
-      vim.opt.signcolumn = "yes"
       vim.diagnostic.config({
-        virtual_text = true,
+        virtual_lines = true,
         signs = true,
         underline = true,
         update_in_insert = true,
@@ -44,6 +26,34 @@ return {
           source = true,
         },
       })
+    end,
+  },
+  {
+    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    keys = {
+      {
+        "<leader>vt",
+        function()
+          local config = vim.diagnostic.config() or {}
+          if config.virtual_text then
+            vim.diagnostic.config({ virtual_text = false, virtual_lines = true })
+          elseif config.virtual_lines then
+            vim.diagnostic.config({ virtual_text = true, virtual_lines = false })
+          end
+        end,
+        desc = "Toggle lsp_lines",
+      },
+      {
+        "<leader>vT",
+        function()
+          vim.diagnostic.config({ virtual_text = false, virtual_lines = false })
+        end,
+        desc = "Turn off lsp_lines and virtual_text",
+      },
+    },
+    config = function()
+      require("lsp_lines").setup()
+      vim.diagnostic.config({ virtual_text = false, virtual_lines = true })
     end,
   },
 }
