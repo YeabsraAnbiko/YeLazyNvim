@@ -25,7 +25,7 @@ return {
       dapui.setup()
 
       -- Setup virtual text
-      require("nvim-dap-virtual-text").setup()
+      require("nvim-dap-virtual-text").setup({})
 
       -- Auto open/close dap-ui
       dap.listeners.after.event_initialized["dapui_config"] = function()

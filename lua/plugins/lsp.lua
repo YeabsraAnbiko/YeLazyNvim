@@ -12,7 +12,6 @@ return {
       -- nvim lsp mapings
       { "gd", vim.lsp.buf.definition, desc = "Go to Definition" },
       { "gD", vim.lsp.buf.declaration, desc = "Go to Declaration" },
-      { "<leader>fd", vim.lsp.buf.format, desc = "Format Document (Visual)" },
     },
 
     config = function()
@@ -46,9 +45,23 @@ return {
       {
         "<leader>vT",
         function()
-          vim.diagnostic.config({ virtual_text = false, virtual_lines = false })
+          local cfg = vim.diagnostic.config() or {}
+
+          local diagnostics_enabled = cfg.virtual_text or cfg.virtual_lines
+
+          if diagnostics_enabled then
+            vim.diagnostic.config({
+              virtual_text = false,
+              virtual_lines = false,
+            })
+          else
+            vim.diagnostic.config({
+              virtual_text = true,
+              virtual_lines = false,
+            })
+          end
         end,
-        desc = "Turn off lsp_lines and virtual_text",
+        desc = "Toggle all diagnostics (virtual_text + lsp_lines)",
       },
     },
     config = function()
