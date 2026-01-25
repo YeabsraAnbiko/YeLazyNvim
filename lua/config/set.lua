@@ -19,7 +19,6 @@ vim.opt.laststatus = 3
 vim.opt.number = true -- Enable line numbers
 vim.opt.relativenumber = true -- Enable relative line numbers
 vim.opt.cursorline = true -- Highlight the current line
-vim.opt.cursorcolumn = true -- Highlight the current column
 
 -- Wrapping settings
 vim.opt.wrap = false -- Disable line wrapping
@@ -51,12 +50,25 @@ vim.opt.splitright = true -- Open vertical splits to the right
 vim.opt.mouse = "a" -- Enable mouse support
 
 -- Fold settings
---vim.opt.foldexpr = "nvim_treesitter#foldexpr()"   -- Use Treesitter for folds
---vim.opt.foldenable = true                         -- Enable folding
---vim.opt.foldlevel = 99                            -- Start with unfolded code
+-- vim.wo.foldmethod = 'expr'
+-- vim.wo.foldexpr = 'v:lua.vim.lsp.foldexpr()'
+-- vim.wo.foldmethod = 'expr'
+-- vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+-- Default to treesitter folding
+-- vim.wo.foldmethod = 'expr'
+-- vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+--
+-- -- Switch to LSP folding when an LSP server attaches that supports it
+-- vim.api.nvim_create_autocmd('LspAttach', {
+--   callback = function(args)
+--     local client = vim.lsp.get_client_by_id(args.data.client_id)
+--     if client and client.supports_method('textDocument/foldingRange') then
+--       vim.wo.foldexpr = 'v:lua.vim.lsp.foldexpr()'
+--     end
+--   end,
+-- })
 
-vim.opt.foldmethod = "manual" -- Use expressions for folding
-vim.opt.foldcolumn = "auto"
+
 
 vim.api.nvim_create_autocmd("TextYankPost", {
   desc = "Highlight when yanking (copying) text",
@@ -91,9 +103,3 @@ function Bgvis()
 end
 
 vim.opt.list = true
-vim.opt.listchars = {
-  tab = "󰌒 ",
-  eol = "󰌑",
-  trail = "•",
-  space = "·",
-}

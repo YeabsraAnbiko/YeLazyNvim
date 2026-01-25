@@ -1,130 +1,183 @@
+
 # YeLazyNvim
 
-YeLazyNvim is a modular, clean, and performant Neovim configuration built with [lazy.nvim](https://github.com/folke/lazy.nvim). It’s designed for developers who want a powerful and easy setup.
+**YeLazyNvim** is a modular, clean, and performance-focused Neovim configuration built on top of [lazy.nvim](https://github.com/folke/lazy.nvim). It is designed for developers who want a modern Neovim setup with sensible defaults, strong language tooling, and thoughtful UI/UX polish-without unnecessary bloat.
 
 ---
 
-## ✨ Highlights
+## Highlights
 
-- **Modular Design**: Plugins and settings are organized thematically (e.g., `dap.lua`, `lsp.lua`, `git_and_undo.lua`).
-- **Well-Chosen Plugins**: Includes top-tier plugins like Telescope, Treesitter, LSP, CMP, DAP, and more.
-- **Thoughtful Configuration**: Keybindings, styling, breadcrumbs (via `nvim-navic`), and rich UI polish.
-- **Performance-Oriented**: Uses lazy-loading (`event = "VeryLazy"` or `BufReadPost`) for fast startup and responsiveness.
-
----
-
-## 🚀 Installation
-
-Clone this repo into your Neovim config folder:
-
-```bash
-git clone https://github.com/YeabsraAnbiko/YeLazyNvim ~/.config/nvim
-```
-
-# YeLazyNvim Configuration Overview
-
-## 🛠️ Customization
-
-Edit files inside `~/.config/nvim/lua/plugins/` and `~/.config/nvim/lua/config/` for:
-
-- Keybindings
-- Plugin configurations
-- LSP server setup
-- UI theming
+- **Modular Architecture**  
+    Plugins and configuration are organized by responsibility (LSP, UI, completion, debugging, etc.) for clarity and maintainability.
+- **Curated Plugin Stack**  
+    Includes best-in-class plugins for LSP, completion, formatting, Git, debugging, navigation, and UI.
+- **Performance-Oriented**  
+    Aggressive lazy-loading (`VeryLazy`, `BufReadPre`, `InsertEnter`, keybind triggers) ensures fast startup and responsive editing.
+- **Developer-Centric UX**  
+    Breadcrumbs, folding, formatting-on-save, Git integration, AI assistance, and polished defaults.
 
 ---
 
-## 🧠 Plugin Breakdown
+## Installation
+
+Clone the repository into your Neovim configuration directory:
+
+`git clone https://github.com/YeabsraAnbiko/YeLazyNvim ~/.config/nvim`
+
+Launch Neovim and allow `lazy.nvim` to install the plugins automatically.
+
+---
+
+## Customization
+
+Configuration is intentionally straightforward:
+
+- `lua/config/` - core settings (options, keymaps, autocmds)
+- `lua/plugins/` - individual plugin specifications and setup
+
+You can easily:
+
+- Add or remove plugins
+- Adjust keybindings
+- Configure LSP servers and formatters
+- Change themes and UI behavior
+
+---
+
+## Plugin Breakdown
 
 ### Plugin Manager
-- **lazy.nvim**: Declarative and efficient plugin loader
 
-telescope-ui-select.nvim: Telescope UI selector
+- **lazy.nvim** - Declarative, fast, and efficient plugin manager
+
+---
+
 ### UI & UX
-- **Tokyonight**: Beautiful and modern theme  
-- **lualine.nvim**: Fast statusline  
-- **nvim-navic**: Breadcrumbs from LSP symbols  
-- **nvim-colorizer.lua**: Highlights color codes  
-- **nvim-web-devicons**: File icons for Neovim
-- **indent-blankline.nvim**: Indentation guides
-- **gitsigns.nvim**: Git diff signs in the gutter
-- **lspkind.nvim**: LSP icons for diagnostics and code actions
+
+- **tokyonight.nvim** - Modern, clean colorscheme
+- **lualine.nvim** - Fast and minimal statusline
+- **nvim-web-devicons** - File icons
+- **nvim-navic** - LSP-based breadcrumbs
+- **nvim-colorizer.lua** - Inline color highlighting
+- **indent-blankline.nvim** - Indentation guides
+- **nvim-ufo** - Advanced code folding
+- **cloak.nvim** - Conceals sensitive values (e.g., `.env` secrets)
+- **dressing.nvim** - Improved `vim.ui` select/input UIs
+
+---
 
 ### Navigation & Search
-- **telescope.nvim**: Finder over files, LSP, buffers  
-- **telescope-fzf-native.nvim**: FZF sorter for Telescope (native extension)
-- **neo-tree.nvim**: Tree-based file explorer  
-- **nvim-window-picke**r: Window picker UI
 
-### Git & Undo History
-- **Neogit**: Git interface inside Neovim (loaded on demand)
-- **diffview.nvim**: Git diff viewer (loaded on demand)
-- **gitsigns.nvim**: Git diff signs in gutter  
-- **undotree**: Undo history visualization  (loaded on demand)
+- **telescope.nvim** - Fuzzy finder for files, buffers, LSP symbols
+- **telescope-fzf-native.nvim** - Native FZF sorter
+- **telescope-ui-select.nvim** - Telescope-powered UI selectors
+- **neo-tree.nvim** - Tree-based file explorer
+- **oil.nvim** - Edit your filesystem like a buffer
 
-### LSP & Tools
-- **nvim-lspconfig**: Easy LSP server config  
-- **mason.nvim**: Install LSP servers and tools  
-- **mason-lspconfig.nvim**: Mason and LSP bridge  
-- **nvim-lsp-file-operations**: File operations with LSP integration
-- **nvim-navic**: Breadcrumbs from LSP symbols  
+---
 
-### Autocompletion
-- **nvim-cmp**: Completion engine  
-- **cmp-nvim-lsp**: LSP source for cmp  
-- **cmp-buffer**: Buffer source for nvim-cmp
-- **cmp-path**: Path completion source
-- **cmp_luasnip**: Snippet completion source
-- **copilot-cmp**: GitHub Copilot source for nvim-cmp (loaded)
-- **copilot.lua**: GitHub Copilot integration (lazy-loaded on InsertEnter)
-- **cmp-path, cmp-buffer, cmp_luasnip**  
-- **LuaSnip**: Snippet engine  
-- **friendly-snippets**: Collection of snippets
-- **mini.pairs**: Auto-pairing of brackets and quotes
+### Git & Undo
+
+- **gitsigns.nvim** - Git diff indicators in the gutter
+- **neogit** - Magit-like Git UI (lazy-loaded)
+- **diffview.nvim** - Side-by-side Git diff viewer (lazy-loaded)
+- **undotree** - Visual undo history (lazy-loaded)
+
+---
+
+### LSP & Language Tooling
+
+- **nvim-lspconfig** - LSP client configurations
+- **mason.nvim** - Install LSP servers, linters, and formatters
+- **mason-lspconfig.nvim** - Mason  LSP bridge
+- **nvim-lsp-file-operations** - File operations with LSP awareness
+- **lazydev.nvim** - Improved Lua development for Neovim configs
+- **nvim-jdtls** - Java language server integration
+- **lsp_lines.nvim** - Inline LSP diagnostics (toggleable)
+
+---
+
+### Formatting & Code Quality
+
+- **conform.nvim** - Fast, async code formatting (format-on-save ready)
+
+---
+
+### Autocompletion & Snippets
+
+- **nvim-cmp** - Completion engine
+- **cmp-nvim-lsp** - LSP completion source
+- **cmp-buffer** - Buffer completion source
+- **cmp-path** - Path completion source
+- **cmp-cmdline** - Command-line completion
+- **cmp_luasnip** - Snippet completion source
+- **LuaSnip** - Snippet engine
+- **friendly-snippets** - Predefined snippet collection
+- **lspkind.nvim** - Completion item icons
+- **mini.pairs** - Automatic bracket and quote pairing
+
+---
+
+### AI Assistance
+
+- **copilot.lua** - GitHub Copilot integration
+- **copilot-cmp** - Copilot source for `nvim-cmp`
+- **avante.nvim** - AI-powered coding assistant and workflows
+
+---
 
 ### Syntax & Structure
-- **nvim-treesitter**: Syntax-aware parsing and highlighting  
-- **nvim-ts-autotag**: Auto-close and rename HTML tags  
-- **nvim-treesitter-textobjects**: Text objects powered by Treesitter
+
+- **nvim-treesitter** - Syntax-aware parsing and highlighting
+- **nvim-ts-autotag** - Auto-close and rename HTML/JSX tags
+- **nvim-treesitter-textobjects** - Treesitter-powered text objects
+
+---
 
 ### Debugging
-- **nvim-dap**: Debug Adapter Protocol support  
-- **nvim-dap-ui**: UI for nvim-dap
-- **mason-nvim-dap.nvim**: Mason integration for DAP
-- **nvim-dap-virtual-text**: Virtual text support for debugging
-- **nvim-nio**: Additional DAP utilities
+
+- **nvim-dap** - Debug Adapter Protocol support
+- **nvim-dap-ui** - Debugging UI
+- **nvim-dap-virtual-text** - Inline variable values
+- **mason-nvim-dap.nvim** - Mason integration for DAP
+- **nvim-nio** - Async utilities for DAP
 
 ---
 
-## 🧩 Structure
+### Markdown
+
+- **render-markdown.nvim** - Enhanced Markdown rendering (lazy-loaded)
+
+---
+
+## Project Structure
 
 ```bash
-~/.config/nvim/
-├── lua/
-│   ├── config/          # General settings (keymaps, options)
-│   └── plugins/         # All plugin specs (modular)
-├── init.lua             # Entry point for lazy.nvim
-└── README.md            # This file
+-~/.config/nvim/
+-├── lua/
+-│   ├── config/          # General settings (keymaps, options)
+-│   └── plugins/         # All plugin specs (modular)
+-├── init.lua             # Entry point for lazy.nvim
+-└── README.md            # This file
 ```
----
-
-## 📄 License
-
-This project is licensed under the **MIT License**. See the `LICENSE` file for full details.
 
 ---
 
-## 🙌 Credits
+## License
 
-Special thanks to the amazing authors and maintainers of:
+This project is licensed under the **MIT License**. See the `LICENSE` file for details.
 
-- [lazy.nvim](https://github.com/folke/lazy.nvim)  
-- [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)  
-- [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)  
-- [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)  
-- [mason.nvim](https://github.com/mason-org/mason.nvim)  
-- [nvim-dap](https://github.com/mfussenegger/nvim-dap)  
-- and many others whose plugins are included!
+---
 
-Feel free to fork, clone, and contribute to make YeLazyNvim even better!
+## Credits
 
+This configuration stands on the shoulders of excellent open-source work, including but not limited to:
+
+- lazy.nvim
+- nvim-treesitter
+- telescope.nvim
+- nvim-cmp
+- mason.nvim
+- nvim-dap
+
+.and many other outstanding Neovim plugin authors.
