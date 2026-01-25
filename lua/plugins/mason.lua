@@ -13,6 +13,11 @@ return {
         },
       },
     },
+    config = function()
+      require("mason").setup({
+        log_level = vim.log.levels.DEBUG,
+      })
+    end,
   },
 
   -- Mason LSPconfig integration
@@ -23,7 +28,13 @@ return {
       { "mason-org/mason.nvim" },
       "neovim/nvim-lspconfig",
     },
-    opts = function()
+    opts = {
+      automatic_enable = {
+        exclude = { "jdtls" },
+      }
+    },
+    config = function()
+      require("mason-lspconfig").setup()
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
       capabilities.textDocument.completion.completionItem.snippetSupport = true
 

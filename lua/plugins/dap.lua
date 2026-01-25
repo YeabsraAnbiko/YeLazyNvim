@@ -21,20 +21,30 @@ return {
         handlers = {}, -- auto-setup all default adapters
       })
 
-      -- Setup dap-ui
+      dap.configurations.java = {
+        {
+          type = "java",
+          request = "attach",
+          name = "Attach to Spring Boot",
+          hostName = "127.0.0.1",
+          port = 5005,
+        },
+      }
+
       dapui.setup()
 
       -- Setup virtual text
-      require("nvim-dap-virtual-text").setup({})
+      require("nvim-dap-virtual-text").setup({
+        commented = true,
+      })
 
-      -- Auto open/close dap-ui
-      dap.listeners.after.event_initialized["dapui_config"] = function()
+      dap.listeners.after.event_initialized["dapui"] = function()
         dapui.open()
       end
-      dap.listeners.before.event_terminated["dapui_config"] = function()
+      dap.listeners.before.event_terminated["dapui"] = function()
         dapui.close()
       end
-      dap.listeners.before.event_exited["dapui_config"] = function()
+      dap.listeners.before.event_exited["dapui"] = function()
         dapui.close()
       end
     end,
