@@ -8,7 +8,17 @@ return {
     event = "VeryLazy",
     config = function()
       local ufo = require("ufo")
+      vim.keymap.set("n", "zR", ufo.openAllFolds)
+      vim.keymap.set("n", "zM", ufo.closeAllFolds)
 
+      -- Provider setup
+      ufo.setup({
+        provider_selector = function(_, filetype, buftype)
+          return { "treesitter", "indent" }
+        end,
+      })
+    end,
+    init = function()
       -- Required fold settings
       vim.o.foldcolumn = "1"
       vim.o.foldlevel = 99
@@ -23,15 +33,6 @@ return {
         eob = " ",
       }
       -- Keymaps
-      vim.keymap.set("n", "zR", ufo.openAllFolds)
-      vim.keymap.set("n", "zM", ufo.closeAllFolds)
-
-      -- Provider setup
-      ufo.setup({
-        provider_selector = function(_, filetype, buftype)
-          return { "treesitter", "indent" }
-        end,
-      })
     end,
   },
 }

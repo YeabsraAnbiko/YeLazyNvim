@@ -89,7 +89,7 @@ You can easily:
 
 - **nvim-lspconfig** - LSP client configurations
 - **mason.nvim** - Install LSP servers, linters, and formatters
-- **mason-lspconfig.nvim** - Mason  LSP bridge
+- **mason-lspconfig.nvim** - Mason LSP bridge
 - **nvim-lsp-file-operations** - File operations with LSP awareness
 - **lazydev.nvim** - Improved Lua development for Neovim configs
 - **nvim-jdtls** - Java language server integration
