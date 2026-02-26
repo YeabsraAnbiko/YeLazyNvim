@@ -1,6 +1,7 @@
 return {
   "mfussenegger/nvim-jdtls",
-  dependancy = {
+
+  dependencies = {
     "mfussenegger/nvim-dap",
-  },
+  }
 }
