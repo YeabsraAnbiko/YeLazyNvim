@@ -5,6 +5,13 @@ function M.setup()
   local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
   local workspace_dir = workspace_path .. project_name
   local mason_path = vim.fn.stdpath("data") .. "/mason/packages"
+  local bundles = {}
+
+  vim.list_extend(
+    bundles,
+    vim.fn.glob(mason_path .. "/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar", false, true)
+  )
+  vim.list_extend(bundles, vim.fn.glob(mason_path .. "/java-test/extension/server/*.jar", false, true))
 
   local status, jdtls = pcall(require, "jdtls")
   if not status then
@@ -69,10 +76,7 @@ function M.setup()
     },
 
     init_options = {
-      bundles = vim.tbl_flatten({
-        vim.fn.glob(mason_path .. "/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar", true),
-        vim.fn.glob(mason_path .. "/java-test/extension/server/*.jar", true),
-      }),
+      bundles = bundles,
     },
   }
   require("jdtls").start_or_attach(config)

@@ -93,7 +93,7 @@ return {
         ensure_installed = servers,
         automatic_enable = {
           exclude = {
-            "jdsls",
+            "jdtls",
           },
         },
       })
