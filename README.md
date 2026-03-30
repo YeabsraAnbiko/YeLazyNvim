@@ -62,7 +62,6 @@ You can easily:
 - **indent-blankline.nvim** - Indentation guides
 - **nvim-ufo** - Advanced code folding
 - **cloak.nvim** - Conceals sensitive values (e.g., `.env` secrets)
-- **dressing.nvim** - Improved `vim.ui` select/input UIs
 
 ---
 
@@ -91,9 +90,7 @@ You can easily:
 - **mason.nvim** - Install LSP servers, linters, and formatters
 - **mason-lspconfig.nvim** - Mason LSP bridge
 - **nvim-lsp-file-operations** - File operations with LSP awareness
-- **lazydev.nvim** - Improved Lua development for Neovim configs
 - **nvim-jdtls** - Java language server integration
-- **lsp_lines.nvim** - Inline LSP diagnostics (toggleable)
 
 ---
 
@@ -122,7 +119,6 @@ You can easily:
 
 - **copilot.lua** - GitHub Copilot integration
 - **copilot-cmp** - Copilot source for `nvim-cmp`
-- **avante.nvim** - AI-powered coding assistant and workflows
 
 ---
 
@@ -130,7 +126,6 @@ You can easily:
 
 - **nvim-treesitter** - Syntax-aware parsing and highlighting
 - **nvim-ts-autotag** - Auto-close and rename HTML/JSX tags
-- **nvim-treesitter-textobjects** - Treesitter-powered text objects
 
 ---
 
